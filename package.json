@@ -7,7 +7,8 @@
     "format:write": "pnpm nx run-many -t format:write",
     "lint": "pnpm nx run-many -t lint",
     "lint:fix": "pnpm nx run-many -t lint:fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev:app-landing": "pnpm nx dev @oxcyn-apps/web-landing"
   },
   "private": true,
   "devDependencies": {
