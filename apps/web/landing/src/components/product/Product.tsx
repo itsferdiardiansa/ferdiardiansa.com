@@ -22,7 +22,7 @@ export default function Product() {
       <div className="mt-8">
         <Image
           width={800}
-          height={200}
+          height={600}
           src="/images/monomod.png"
           className="rounded-2xl group-hover:ring-white/20 duration-300 invert dark:invert-0 aspect-[4/4] bg-primary/5 dark:bg-primary ring-1 ring-white/10  object-cover"
           objectFit="cover"

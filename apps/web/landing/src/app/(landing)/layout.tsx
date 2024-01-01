@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: '@its.ferdi',
+  description: 'A person who always curious in software development.',
+}
+
 export default function LandingLayout({
   children,
 }: {

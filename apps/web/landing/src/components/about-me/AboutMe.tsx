@@ -16,13 +16,10 @@ export default function AboutMe() {
         Hey, welcome to my site!
       </p>
       <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 font-light lg:text-xl">
-        I&apos;m a digital designer, developer, and surfer from Malibu. In the
-        digital world, I craft interfaces and dive into coding intricacies.
-        <br />
-        <br />
-        Beyond screens, I find solace and joy riding waves along Malibu&apos;s
-        shores. My life blends tech and nature, coding sessions, and catching
-        waves.
+        I&apos;m a Software Enginner and currently live in Indonesia 🇮🇩. I
+        translate design into a webpage that matches with business requirements.
+        {/* <br /> */}
+        {/* <br /> */}
       </p>
     </div>
   )

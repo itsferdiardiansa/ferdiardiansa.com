@@ -8,8 +8,8 @@ export default function Project() {
     >
       <div className="-mr-24">
         <Image
-          width={100}
-          height={100}
+          width={800}
+          height={500}
           src="/images/lexington.png"
           className="rounded-2xl object-cover ring-1 h-64 w-full lg:h-auto dark:ring-white/10 ring-primary/5 bg-tertiary"
           alt=""
