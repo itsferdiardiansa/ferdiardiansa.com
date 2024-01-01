@@ -2,14 +2,32 @@
   "name": "oxcyn",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "format": "pnpm nx run-many -t format",
+    "format:write": "pnpm nx run-many -t format:write",
+    "lint": "pnpm nx run-many -t lint",
+    "lint:fix": "pnpm nx run-many -t lint:fix",
+    "prepare": "husky install"
+  },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@nx/js": "17.2.8",
-    "nx": "17.2.8"
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
+    "nx": "17.2.8",
+    "prettier": "^3.1.1"
   },
   "workspaces": [
+    "apps/*",
     "packages/*"
-  ]
+  ],
+  "lint-staged": {
+    "**/*.{js,ts,tsx}": [
+      "pnpm run format:write",
+      "pnpm run lint:fix"
+    ],
+    "**/*": "prettier --write --ignore-unknown"
+  }
 }
