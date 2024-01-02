@@ -6,13 +6,13 @@ export default function Description() {
         for digital products.
         <br />
         <br />
-        I engaged in a lot of veriety IT Industry and completed to translate a
-        design into a good or high-performance product that matched with
-        business requirements.
+        I engaged in a lot of variety in the IT industry and completed
+        translating a design into a good or high-performance product that
+        matched business requirements.
         <br />
         <br />
-        Outsie of work, I do like learning another tech that I haven&apos;t
-        covered and drill down it.
+        Outside of work, I do like learning another tech that I haven&apos;t
+        drilled down.
       </p>
       <p className="text-primary dark:text-white mt-4 italic">Ferdi Ardiansa</p>
     </div>
