@@ -1,4 +1,3 @@
-// import "boxicons"
 import './globals.css'
 
 export default function RootLayout({
@@ -19,7 +18,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="">{children}</body>
+      <body className="dark:bg-primary bg-zinc-200">{children}</body>
     </html>
   )
 }

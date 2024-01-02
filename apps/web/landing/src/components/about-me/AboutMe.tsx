@@ -1,53 +1,31 @@
 export default function AboutMe() {
   return (
-    <div className="dark:ring-white/10 ring-primary/5 dark:bg-secondary shadow-xl dark:shadow-thick rounded-3xl">
-      <div className="space-y-5">
-        <div className="shadow rounded-xl overflow-hidden">
-          <div
-            className="h-32 bg-cover"
-            style={{
-              backgroundImage: "url('/images/lexington.png');",
-            }}
-          ></div>
-          <div className="text-sm leading-6 p-7">
-            <p className="text-primary dark:text-white text-2xl font-semibold">
-              {/* <span className="absolute inset-0"></span> */}
-              Ferdi Ardiansa
-            </p>
-
-            <p className="text-zinc-500 dark:text-zinc-400">
-              Software Engineer | Typescript | Javascript | Web Developer
-            </p>
-
-            <div className="border-t border-gray-500 my-5"></div>
-
-            <div className="block-section">
-              <h2 className="font-bold text-lg mb-4">Information</h2>
-
-              <div className="space-y-4">
-                <div className="flex justify-between">
-                  <div className="text-gray-400">Location</div>
-                  <div className="font-medium text-right text-gray-600">
-                    Indonesia
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="text-gray-400">Experience</div>
-                  <div className="font-medium text-right text-gray-600">
-                    4+ years
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="text-gray-400">Availability</div>
-                  <div className="font-medium text-right text-gray-600">
-                    1 week
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div className="lg:row-span-1 ring-1 dark:ring-white/10 ring-primary/5 dark:bg-secondary shadow-xl dark:shadow-thick rounded-3xl p-8">
+      <div className="relative flex items-center gap-x-4">
+        <div className="text-sm leading-6">
+          <p className="font-semibold text-primary dark:text-white">
+            <a href="#">
+              <span className="absolute inset-0"></span>
+              @Ferdi.ardiansa
+            </a>
+          </p>
+          <p className="text-zinc-500 dark:text-zinc-400">
+            Software Engineer Frontend
+          </p>
         </div>
       </div>
+      <p className="text-3xl mt-6 font-medium lg:text-4xl tracking-tight text-primary dark:text-white">
+        Hey, welcome to my site!
+      </p>
+      <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400 font-light lg:text-xl">
+        I&apos;m a software engineer, developer based in Indonesia. I craft
+        design into a webpage and dive into coding intricacies.
+        {/* <br />
+        <br />
+        Beyond screens, I find solace and joy riding waves along Malibu&apos;s
+        shores. My life blends tech and nature, coding sessions, and catching
+        waves. */}
+      </p>
     </div>
   )
 }
