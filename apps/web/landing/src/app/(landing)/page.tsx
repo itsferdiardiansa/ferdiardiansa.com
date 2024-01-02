@@ -13,21 +13,20 @@ export default function Home() {
     <>
       <AboutMe />
 
-      <FindMe />
-
-      <GrabResume />
-
       <Project />
-
-      <Product />
-
-      <Community />
 
       <Description />
 
-      <Newsletter />
+      {/* <GrabResume /> */}
 
-      <Activity />
+      {/* <Product /> */}
+
+      {/* <Community /> */}
+
+      <FindMe />
+      {/* <Newsletter /> */}
+
+      {/* <Activity /> */}
     </>
   )
 }
