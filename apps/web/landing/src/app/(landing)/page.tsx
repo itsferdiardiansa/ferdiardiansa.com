@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <AboutMe />
 
-      <Project />
+      {/* <Project /> */}
 
       <Description />
 
@@ -23,7 +23,7 @@ export default function Home() {
 
       {/* <Community /> */}
 
-      <FindMe />
+      {/* <FindMe /> */}
       {/* <Newsletter /> */}
 
       {/* <Activity /> */}

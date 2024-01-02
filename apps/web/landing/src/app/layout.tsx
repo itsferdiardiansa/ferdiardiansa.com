@@ -1,3 +1,4 @@
+// import "boxicons"
 import './globals.css'
 
 export default function RootLayout({
@@ -7,7 +8,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="dark:bg-primary bg-zinc-200">{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
+        />
+      </head>
+
+      <body className="">{children}</body>
     </html>
   )
 }
