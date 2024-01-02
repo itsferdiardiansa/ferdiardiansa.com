@@ -7,7 +7,7 @@ export default function FindMe() {
     <div className="ring-1 dark:ring-white/10 ring-primary/5 rounded-3xl justify-between shadow-xl dark:shadow-thick flex flex-col items-start p-8 h-full bg-white dark:bg-secondary">
       <div className="w-full">
         <p className="text-xl font-normal tracking-tight text-primary dark:text-white lg:text-8xl">
-          Lets get in touch
+          Let&apos;s get in touch
         </p>
       </div>
 
