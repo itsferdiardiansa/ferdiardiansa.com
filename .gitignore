@@ -8,6 +8,9 @@ tmp
 # dependencies
 node_modules
 
+# npm
+package-lock.json
+
 # IDEs and editors
 /.idea
 .project
