@@ -35,6 +35,9 @@ importers:
 
   apps/web/landing:
     dependencies:
+      '@oxcyn/tsconfig':
+        specifier: workspace:^
+        version: link:../../../packages/config/tsconfig
       '@types/oxcyn':
         specifier: workspace:^
         version: link:../../../packages/@types/oxcyn
@@ -86,6 +89,8 @@ importers:
         version: 5.3.3
 
   packages/@types/oxcyn: {}
+
+  packages/config/tsconfig: {}
 
 packages:
 

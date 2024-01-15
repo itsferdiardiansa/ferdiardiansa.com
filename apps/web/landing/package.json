@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@oxcyn/tsconfig": "workspace:^",
     "@types/oxcyn": "workspace:^",
     "firebase": "^10.7.1",
     "next": "14.0.4",
