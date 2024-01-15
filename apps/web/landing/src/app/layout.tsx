@@ -1,41 +1,23 @@
 import { Metadata, Viewport } from 'next'
+import { unstable_cache as cache } from 'next/cache'
+import { getBaseMetadata } from '@/firestore/collections/metadata'
+
 import './globals.css'
+
+const getBaseMetadataCache = cache(
+  async () => getBaseMetadata(),
+  ['baseMetadata'],
+  { tags: ['baseMetadata'] }
+)
 
 export const viewport: Viewport = {
   themeColor: '#1b1d20',
 }
 
-export const metadata: Metadata = {
-  title: '@its.ferdi',
-  applicationName: 'Oxcyn',
-  description: 'A person who always curious in software development.',
-  authors: [{ name: '@its.ferdi', url: 'https://www.ferdiardiansa.com' }],
-  creator: 'Ferdi Ardiansa',
-  keywords: ['software engineer frontend', 'typescript', 'react', 'nextjs'],
-  icons: {
-    icon: [
-      {
-        rel: 'icon',
-        url: '/favicons/icon1.png',
-        sizes: '16x16',
-        type: 'image/png',
-      },
-      {
-        rel: 'icon',
-        url: '/favicons/icon2.png',
-        sizes: '32x32',
-        type: 'image/png',
-      },
-      {
-        rel: 'icon',
-        url: '/favicons/apple-icon.png',
-        sizes: '180x180',
-        type: 'image/png',
-      },
-    ],
-  },
-  manifest: '/favicons/site.webmanifest',
-  category: 'technology',
+export async function generateMetadata(): Promise<Metadata> {
+  const { data } = await getBaseMetadataCache()
+
+  return { ...data }
 }
 
 export default function RootLayout({
