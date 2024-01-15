@@ -1,6 +1,6 @@
 import { DocumentData, SnapshotMetadata, doc, getDoc } from 'firebase/firestore'
 import { SuccessResponseData } from '@oxcyn/response'
-import db from '@/firestore'
+import { db } from '@oxcyn/firebase'
 
 export async function getBaseMetadata(): Promise<
   SuccessResponseData<DocumentData, SnapshotMetadata>

@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "@oxcyn/firebase",
+  "version": "1.0.0",
+  "description": "A firebase lib",
+  "main": "index.ts",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [
+    "firebase",
+    "typescript"
+  ],
+  "author": {
+    "email": "ferdiardiansa@gmail.com",
+    "name": "Ferdi Ardiansa",
+    "url": "https://github.com/itsferdiardiansa"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@oxcyn/tsconfig": "workspace:^",
+    "firebase": "^10.7.1",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6"
+  }
+}

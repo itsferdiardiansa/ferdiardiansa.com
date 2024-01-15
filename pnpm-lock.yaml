@@ -35,6 +35,9 @@ importers:
 
   apps/web/landing:
     dependencies:
+      '@oxcyn/firebase':
+        specifier: workspace:^
+        version: link:../../../packages/libs/firebase
       '@oxcyn/tsconfig':
         specifier: workspace:^
         version: link:../../../packages/config/tsconfig
@@ -91,6 +94,22 @@ importers:
   packages/@types/oxcyn: {}
 
   packages/config/tsconfig: {}
+
+  packages/libs/firebase:
+    dependencies:
+      '@oxcyn/tsconfig':
+        specifier: workspace:^
+        version: link:../../config/tsconfig
+      firebase:
+        specifier: ^10.7.1
+        version: 10.7.1
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+    devDependencies:
+      '@types/node':
+        specifier: ^20.10.6
+        version: 20.11.2
 
 packages:
 
@@ -2072,7 +2091,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.10.6
+      '@types/node': 20.11.2
     dev: false
 
   /@grpc/proto-loader@0.7.10:
@@ -2762,12 +2781,12 @@ packages:
     resolution: {integrity: sha512-Vac8H+NlRNNlAmDfGUP7b5h/KA+AtWIzuXy0E6OyP8f1tCLYAtPvKRRDJjAPqhpCb0t6U2j7/xqAuLEebW2kiw==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
 
   /@types/node@20.11.2:
     resolution: {integrity: sha512-cZShBaVa+UO1LjWWBPmWRR4+/eY/JR/UIEcDlVsw3okjWEu+rB7/mH6X3B/L+qJVHDLjk9QW/y2upp9wp1yDXA==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -6243,7 +6262,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.10.6
+      '@types/node': 20.11.2
       long: 5.2.3
     dev: false
 
@@ -7157,7 +7176,6 @@ packages:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /unbox-primitive@1.0.2:
     resolution: {integrity: sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw==}
