@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "format": "pnpm nx run-many -t format",
     "format:write": "pnpm nx run-many -t format:write",
     "lint": "pnpm nx run-many -t lint",
