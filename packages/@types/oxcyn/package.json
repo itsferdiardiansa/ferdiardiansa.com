@@ -3,8 +3,8 @@
   "name": "@types/oxcyn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.d.ts",
-  "scripts": {},
+  "main": "",
+  "types": "types/index.d.ts",
   "keywords": [
     "typescript",
     "oxcyn-types"
@@ -14,8 +14,5 @@
     "url": "https://github.com/itsferdiardiansa/Oxcyn.git"
   },
   "author": "Ferdi Ardiansa",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.3.3"
-  }
+  "license": "ISC"
 }
