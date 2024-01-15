@@ -1,11 +1,19 @@
 {
-  "name": "@types/oxcyn-client",
+  "private": true,
+  "name": "@types/oxcyn",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.d.ts",
   "scripts": {},
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "oxcyn-types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsferdiardiansa/Oxcyn.git"
+  },
+  "author": "Ferdi Ardiansa",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.3.3"
