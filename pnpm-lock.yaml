@@ -140,6 +140,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.23.3
         version: 7.23.3(@babel/core@7.23.7)
+      '@oxcyn/eslint-config':
+        specifier: workspace:^
+        version: link:../config/eslint
       '@types/node':
         specifier: ^20.10.6
         version: 20.10.6
