@@ -43,3 +43,5 @@ export const firebaseApp = app
  * @returns Firestore
  */
 export const db = getFirestore(firebaseApp)
+
+export { getDocumentCollections } from './firestore/document'
