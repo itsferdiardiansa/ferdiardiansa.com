@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@oxcyn/firebase": "workspace:^",
-    "@oxcyn/tsconfig": "workspace:^",
+    "@oxcyn/config": "workspace:^",
     "@types/oxcyn": "workspace:^",
     "firebase": "^10.7.1",
     "next": "14.0.4",

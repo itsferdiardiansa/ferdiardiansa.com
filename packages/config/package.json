@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@oxcyn/tsconfig",
+  "name": "@oxcyn/config",
   "version": "1.0.0",
   "author": {
     "email": "ferdiardiansa@gmail.com",
@@ -8,7 +8,7 @@
     "url": "https://github.com/itsferdiardiansa"
   },
   "files": [
-    "./base.json",
-    "./next.json"
+    "eslint/**/*.json",
+    "tsconfig/**/*.json"
   ]
 }

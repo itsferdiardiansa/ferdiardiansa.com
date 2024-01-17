@@ -18,7 +18,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@oxcyn/tsconfig": "workspace:^",
+    "@oxcyn/config": "workspace:^",
     "@types/oxcyn": "workspace:^",
     "firebase": "^10.7.1",
     "typescript": "^5.3.3"
