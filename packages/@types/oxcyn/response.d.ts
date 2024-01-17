@@ -30,8 +30,10 @@ declare module '@oxcyn/response' {
     NO_CONTENT = 204,
   }
 
+  export type ResponseActionKind = `oxcyn#${string}`
+
   export type SuccessResponseData<D, S> = {
-    kind: `oxcyn#${string}`
+    kind: ResponseActionKind
     code: SuccessCode
     data: D
     metadata: S

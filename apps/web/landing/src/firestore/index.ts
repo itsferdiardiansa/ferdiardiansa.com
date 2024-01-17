@@ -1,1 +1,1 @@
-export * as metadata from './collections/metadata'
+// firestore/index.ts

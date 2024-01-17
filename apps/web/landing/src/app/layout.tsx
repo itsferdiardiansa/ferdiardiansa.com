@@ -2,13 +2,14 @@ import { PropsWithChildren } from 'react'
 import { Metadata, Viewport } from 'next'
 import { unstable_cache as cache } from 'next/cache'
 import { getBaseMetadata } from '@/firestore/collections/metadata'
+import { BASE_METADATA } from '@/constants/cache/metadata'
 
 import './globals.css'
 
-const getBaseMetadataCache = cache(
+const getBaseMetadataCached = cache(
   async () => getBaseMetadata(),
-  ['baseMetadata'],
-  { tags: ['baseMetadata'] }
+  [BASE_METADATA.CACHE_KEY],
+  { tags: [...BASE_METADATA.CACHE_TAGS] }
 )
 
 export const viewport: Viewport = {
@@ -16,7 +17,7 @@ export const viewport: Viewport = {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { data } = await getBaseMetadataCache()
+  const { data } = await getBaseMetadataCached()
 
   return { ...data }
 }
