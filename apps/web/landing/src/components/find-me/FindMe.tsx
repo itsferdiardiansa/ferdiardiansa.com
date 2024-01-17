@@ -36,7 +36,7 @@ export default async function FindMe() {
             </a>
           ))
         ) : (
-          <p>There's no social links.</p>
+          <p>There&apos;s no social links.</p>
         )}
       </div>
     </div>
