@@ -2,7 +2,7 @@
   "private": true,
   "name": "@oxcyn/eslint-config",
   "version": "1.0.0",
-  "main": "./base.json",
+  "main": "main.js",
   "author": {
     "email": "ferdiardiansa@gmail.com",
     "name": "Ferdi Ardiansa",
