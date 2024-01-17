@@ -1,5 +1,5 @@
 {
-  "extends": "@oxcyn/tsconfig/next.json",
+  "extends": "@oxcyn/ts-config/base.json",
   "compilerOptions": {
     "plugins": [
       {
