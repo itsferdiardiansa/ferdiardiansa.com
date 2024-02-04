@@ -1,7 +1,7 @@
-import AboutMe from '@/components/about-me/AboutMe'
-import Description from '@/components/description/Description'
-import FindMe from '@/components/find-me/FindMe'
-import Product from '@/components/product/Product'
+import AboutMe from '@/components/features/about-me/AboutMe'
+import Description from '@/components/features/description/Description'
+import FindMe from '@/components/features/find-me/FindMe'
+import Tech from '@/components/features/tech/Tech'
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
 
       <Description />
 
-      <Product />
+      <Tech />
     </>
   )
 }
