@@ -11,6 +11,7 @@
     "lint": "pnpm nx run-many -t lint",
     "lint:fix": "pnpm nx run-many -t lint:fix",
     "test": "pnpm nx run-many -t test",
+    "test:coverage": "pnpm nx run-many -t test:coverage",
     "dev:app-landing": "pnpm nx dev @oxcyn-apps/web-landing"
   },
   "private": true,
@@ -33,7 +34,8 @@
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
       "pnpm run format:write",
-      "pnpm run lint:fix"
+      "pnpm run lint:fix",
+      "pnpm run test"
     ],
     "**/*": "prettier --write --ignore-unknown"
   }
