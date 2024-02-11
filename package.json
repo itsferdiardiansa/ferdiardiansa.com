@@ -11,7 +11,9 @@
     "lint": "pnpm nx run-many -t lint",
     "lint:fix": "pnpm nx run-many -t lint:fix",
     "test": "pnpm nx run-many -t test",
-    "dev:app-landing": "pnpm nx dev @oxcyn-apps/web-landing"
+    "test:coverage": "pnpm nx run-many -t test:coverage",
+    "dev:app-landing": "pnpm nx dev @oxcyn-apps/web-landing",
+    "generate-coverage": "node ./scripts/generate-coverage.js"
   },
   "private": true,
   "devDependencies": {
@@ -20,10 +22,13 @@
     "@jest/globals": "^29.7.0",
     "@nx/js": "17.2.8",
     "@vercel/remote-nx": "^1.1.1",
+    "chalk": "4",
     "husky": "^8.0.0",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.0",
+    "nodemon": "^3.0.3",
     "nx": "17.2.8",
+    "nyc": "^15.1.0",
     "prettier": "^3.1.1"
   },
   "workspaces": [
@@ -33,7 +38,8 @@
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
       "pnpm run format:write",
-      "pnpm run lint:fix"
+      "pnpm run lint:fix",
+      "pnpm run test"
     ],
     "**/*": "prettier --write --ignore-unknown"
   }

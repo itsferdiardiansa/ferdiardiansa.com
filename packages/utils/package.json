@@ -11,8 +11,9 @@
     "prebuild": "pnpm clear && rimraf dist",
     "build": "tsc",
     "dev": "ts-node-dev --respawn --watch --cls --files src/index.ts",
-    "test": "jest",
-    "test:watch": "jest --watch --verbose=false",
+    "test": "jest --passWithNoTests",
+    "test:watch": "pnpm run test --watch --verbose=false",
+    "test:coverage": "pnpm run test --coverage",
     "lint": "eslint . --ext .ts",
     "lint:fix": "pnpm run lint --fix"
   },
