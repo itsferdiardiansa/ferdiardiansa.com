@@ -11,7 +11,19 @@ permissions:
   contents: read
 
 jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Scanning
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   test:
+    needs: code-review
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Test
+      - name: Run test coverage
         run: pnpm run test:coverage
 
       - name: Generate coverage reports
@@ -36,7 +48,7 @@ jobs:
         with:
           name: ${{ vars.COVERAGE_KEY }}
           path: ${{ vars.COVERAGE_PATH }}
-  upload-to-codecov:
+  upload-coverage:
     needs: test
     runs-on: ubuntu-latest
     steps:
