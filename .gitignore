@@ -43,5 +43,6 @@ Thumbs.db
 
 .nx/cache
 
-# Nyc 
+# Coverage
 .nyc_reports
+coverage
