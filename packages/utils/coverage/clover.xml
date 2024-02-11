@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1707654407546" clover="3.2.0">
+  <project timestamp="1707654407547" name="All files">
+    <metrics statements="15" coveredstatements="15" conditionals="1" coveredconditionals="1" methods="4" coveredmethods="4" elements="20" coveredelements="20" complexity="0" loc="15" ncloc="15" packages="2" files="2" classes="2"/>
+    <package name="number">
+      <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
+      <file name="number.ts" path="/Users/ferdiardiansa/Desktop/Development/oxcyn/packages/utils/src/number/number.ts">
+        <metrics statements="14" coveredstatements="14" conditionals="1" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="23" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="31" count="15" type="stmt"/>
+        <line num="32" count="15" type="stmt"/>
+        <line num="34" count="15" type="stmt"/>
+        <line num="36" count="15" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="4" type="stmt"/>
+        <line num="51" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="tailwind">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="tailwind.ts" path="/Users/ferdiardiansa/Desktop/Development/oxcyn/packages/utils/src/tailwind/tailwind.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="11" count="4" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
