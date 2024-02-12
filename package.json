@@ -13,7 +13,8 @@
     "test": "pnpm nx run-many -t test",
     "test:coverage": "pnpm nx run-many -t test:coverage",
     "dev:app-landing": "pnpm nx dev @oxcyn-apps/web-landing",
-    "generate-coverage": "node ./scripts/generate-coverage.js"
+    "generate-coverage": "node ./scripts/generate-coverage.js",
+    "generate-sonar-properties": "./scripts/generate-sonar-properties.sh"
   },
   "private": true,
   "devDependencies": {
