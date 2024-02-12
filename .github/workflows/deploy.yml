@@ -1,8 +1,5 @@
 name: Deploy
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
     inputs:
       name:
@@ -11,10 +8,6 @@ on:
         options: 
           - api-landing
           - web-landing
-      message:
-        required: true
-      environment:
-        type: environment
 jobs:
   build:
     runs-on: ubuntu-latest
