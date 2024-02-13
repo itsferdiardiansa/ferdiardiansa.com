@@ -42,6 +42,8 @@ export const firebaseApp = app
  *
  * @returns Firestore
  */
-export const db = initializeFirestore(firebaseApp, {})
+export const db = initializeFirestore(firebaseApp, {
+  experimentalAutoDetectLongPolling: true,
+})
 
 export { getDocumentCollections } from './firestore/document'
