@@ -6,6 +6,9 @@ import { BASE_METADATA } from '@/constants/cache/metadata'
 
 import './globals.css'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 2629800 // a month
+
 const getBaseMetadataCached = cache(
   async () => getBaseMetadata(),
   [BASE_METADATA.CACHE_KEY],
