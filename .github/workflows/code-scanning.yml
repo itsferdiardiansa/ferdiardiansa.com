@@ -25,9 +25,6 @@ jobs:
           name: ${{ vars.COVERAGE_KEY }}
           path: ${{ vars.COVERAGE_PATH }}
 
-      - name: List file
-        run: ls -l
-
       - name: Generate a sonar configuration
         env:
           SONAR_PROJECT_VERSION: ${{ vars.SONAR_PROJECT_VERSION }}

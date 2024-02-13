@@ -49,3 +49,4 @@ coverage
 
 # Sonarqube
 sonar-project.properties
+.vercel
