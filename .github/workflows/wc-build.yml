@@ -1,0 +1,41 @@
+name: Build
+on: 
+  workflow_call:
+    inputs:
+      artifact_name:
+        required: true
+        type: string
+    secrets:
+      org_id:
+        required: true
+      project_id:
+        required: true
+      token:
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.org_id }}
+      VERCEL_PROJECT_ID: ${{ secrets.project_id }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup
+
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+
+      - name: Pull Vercel Env
+        run: vercel pull --yes --environment=preview --token=${{ secrets.token }}
+      
+      - name: Build Project Artifacts
+        run: |
+          vercel build --prod --token=${{ secrets.token }}
+      
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}

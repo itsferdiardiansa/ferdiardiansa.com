@@ -1,8 +1,8 @@
 {
-  "name": "landing-api",
+  "name": "@oxcyn-apps/landing-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Oxcyn graph API",
+  "author": "Ferdi Ardiansa",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
