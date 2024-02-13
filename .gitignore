@@ -50,3 +50,6 @@ coverage
 # Sonarqube
 sonar-project.properties
 .vercel
+
+# Env
+.env

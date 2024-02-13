@@ -2,7 +2,7 @@
  * `oxcyn-firebase` a shared lib for oxcyn-apps
  */
 import { initializeApp, getApps } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { initializeFirestore } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -42,6 +42,6 @@ export const firebaseApp = app
  *
  * @returns Firestore
  */
-export const db = getFirestore(firebaseApp)
+export const db = initializeFirestore(firebaseApp, {})
 
 export { getDocumentCollections } from './firestore/document'
