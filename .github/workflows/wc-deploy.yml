@@ -5,6 +5,9 @@ on:
       artifact_name:
         required: true
         type: string
+      environment:
+        required: true
+        type: string
     secrets:
       org_id:
         required: true
@@ -28,4 +31,4 @@ jobs:
           path: .vercel
       
       - name: Deploy
-        run:  vercel deploy --token=${{ secrets.token }}
+        run:  vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }}
