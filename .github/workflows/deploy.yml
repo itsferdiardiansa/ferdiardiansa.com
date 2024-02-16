@@ -1,10 +1,6 @@
 name: 'Deploy'
 run-name: 'deploy: ${{ github.sha }}'
 on:
-  workflow_run:
-    workflows: ["Test"]
-    types:
-      - completed
   workflow_dispatch:
     inputs:
       landing_api:
@@ -26,8 +22,8 @@ on:
 jobs:
   # Landing web flows
   build-landing-web:
-    name: build (landing web) && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
-    if: inputs.landing_web == true
+    name: build (landing web)
+    if: inputs.landing_web == true && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
     uses: ./.github/workflows/wc-build.yml
     with:
       artifact_name: landing-web-artifact
