@@ -1,9 +1,5 @@
 name: Deploy
 on:
-  push:
-    branches:
-      - main
-      - staging
   workflow_dispatch:
     inputs:
       landing_api:
@@ -26,7 +22,7 @@ jobs:
   # Landing web flows
   build-landing-web:
     name: build (landing web)
-    if: inputs.landing_web == true
+    if: inputs.landing_web == true && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
     uses: ./.github/workflows/wc-build.yml
     with:
       artifact_name: landing-web-artifact
@@ -50,8 +46,8 @@ jobs:
   
   # Landing api flows
   build-landing-api:
-    name: build (landing api) - ${{ github.ref }}
-    if: inputs.landing_api == true
+    name: build (landing api)
+    if: inputs.landing_api == true && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
     uses: ./.github/workflows/wc-build.yml
     with:
       artifact_name: landing-api-artifact
