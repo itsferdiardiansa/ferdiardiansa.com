@@ -1,8 +1,11 @@
-name: Build
+name: wc-build
 on: 
   workflow_call:
     inputs:
       artifact_name:
+        required: true
+        type: string
+      environment:
         required: true
         type: string
     secrets:
@@ -29,13 +32,14 @@ jobs:
         run: pnpm add -g vercel@latest
 
       - name: Pull Vercel Env
-        run: vercel pull --yes --environment=preview --token=${{ secrets.token }}
+        run: vercel pull --yes --environment=${{ inputs.environment == 'staging' && 'preview' || 'production' }} --token=${{ secrets.token }}
       
       - name: Build Project Artifacts
         run: |
-          vercel build --prod --token=${{ secrets.token }}
+          vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.token }}
       
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact_name }}
+          path: .vercel

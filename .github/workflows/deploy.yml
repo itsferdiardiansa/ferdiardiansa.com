@@ -1,7 +1,9 @@
-name: Preview Deploy
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+name: Deploy
 on:
+  push:
+    branches:
+      - main
+      - staging
   workflow_dispatch:
     inputs:
       landing_api:
@@ -14,6 +16,12 @@ on:
         required: true
         default: false
         description: Landing web
+      environment:
+        type: choice
+        description: Which server environment would you like to deploy?
+        options:
+          - staging
+          - production
 jobs:
   # Landing web flows
   build-landing-web:
@@ -22,6 +30,7 @@ jobs:
     uses: ./.github/workflows/wc-build.yml
     with:
       artifact_name: landing-web-artifact
+      environment: ${{ inputs.environment }}
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
@@ -33,6 +42,7 @@ jobs:
     uses: ./.github/workflows/wc-deploy.yml
     with:
       artifact_name: landing-web-artifact
+      environment: ${{ inputs.environment }}
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
@@ -40,11 +50,12 @@ jobs:
   
   # Landing api flows
   build-landing-api:
-    name: build (landing api)
+    name: build (landing api) - ${{ github.ref }}
     if: inputs.landing_api == true
     uses: ./.github/workflows/wc-build.yml
     with:
       artifact_name: landing-api-artifact
+      environment: ${{ inputs.environment }}
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
@@ -56,6 +67,7 @@ jobs:
     uses: ./.github/workflows/wc-deploy.yml
     with:
       artifact_name: landing-api-artifact
+      environment: ${{ inputs.environment }}
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
