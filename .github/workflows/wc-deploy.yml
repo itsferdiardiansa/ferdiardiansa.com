@@ -32,3 +32,10 @@ jobs:
       
       - name: Deploy
         run:  vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }}
+  clean-artifact:
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: geekyeggo/delete-artifact@v4
+        with:
+          name: ${{ inputs.artifact_name }}
