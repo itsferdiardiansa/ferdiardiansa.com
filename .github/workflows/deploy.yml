@@ -48,7 +48,7 @@ jobs:
   # Landing api flows
   build-landing-api:
     name: build (landing api)
-    if: inputs.landing_api == true && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
+    if: inputs.landing_api == true && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
     uses: ./.github/workflows/wc-build.yml
     with:
       artifact_name: landing-api-artifact
