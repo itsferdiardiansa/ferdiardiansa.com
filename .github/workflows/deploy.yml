@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: Deploy
 run-name: 'deploy: ${{ github.sha }}'
 on:
   workflow_dispatch:
@@ -20,51 +20,27 @@ on:
           - staging
           - production
 jobs:
-  # Landing web flows
-  build-landing-web:
-    name: build (landing web)
+  deploy-landing-web:
     if: inputs.landing_web == true && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
-    uses: ./.github/workflows/wc-build.yml
+    uses: ./.github/workflows/wc-deploy-schema.yml
     with:
       artifact_name: landing-web-artifact
       environment: ${{ inputs.environment }}
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
-      token: ${{ secrets.VERCEL_TOKEN }}
-  
-  deploy-lending-web:
-    name: deploy (landing web)
-    needs: build-landing-web
-    uses: ./.github/workflows/wc-deploy.yml
-    with:
-      artifact_name: landing-web-artifact
-      environment: ${{ inputs.environment }}
-    secrets:
-      org_id: ${{ secrets.VERCEL_ORG_ID }}
-      project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
-      token: ${{ secrets.VERCEL_TOKEN }}
-  
-  # Landing api flows
-  build-landing-api:
-    name: build (landing api)
-    if: inputs.landing_api == true && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
-    uses: ./.github/workflows/wc-build.yml
-    with:
-      artifact_name: landing-api-artifact
-      environment: ${{ inputs.environment }}
-    secrets:
-      org_id: ${{ secrets.VERCEL_ORG_ID }}
-      project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
       token: ${{ secrets.VERCEL_TOKEN }}
 
-  deploy-lending-api:
-    name: deploy (landing api)
-    needs: build-landing-api
-    uses: ./.github/workflows/wc-deploy.yml
+  deploy-landing-api:
+    if: inputs.landing_api == true && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
+    uses: ./.github/workflows/wc-deploy-schema.yml
     with:
       artifact_name: landing-api-artifact
       environment: ${{ inputs.environment }}
+      pre_built: true
+      pre_built_cmd: |
+        pnpm i
+        npx nx build @oxcyn-apps/landing-api
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_API_LANDING_ID }}

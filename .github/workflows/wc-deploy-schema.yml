@@ -8,6 +8,11 @@ on:
       environment:
         required: true
         type: string
+      pre_built:
+        type: boolean
+        default: false
+      pre_built_cmd:
+        type: string
     secrets:
       org_id:
         required: true
@@ -34,12 +39,12 @@ jobs:
       - name: Pull Vercel Env
         run: vercel pull --yes --environment=${{ inputs.environment == 'staging' && 'preview' || 'production' }} --token=${{ secrets.token }}
       
-      - name: Build Project Artifacts
-        run: |
-          vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.token }}
-      
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ inputs.artifact_name }}-${{ github.sha }}
-          path: .vercel/output
+      - name: Pre build
+        if: inputs.pre_built == true
+        run: ${{ inputs.pre_built_cmd }}
+
+      - name: Build
+        run: vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.token }} -d
+
+      - name: Deploy
+        run: vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }} -d
