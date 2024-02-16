@@ -1,0 +1,62 @@
+name: Preview Deploy
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+on:
+  workflow_dispatch:
+    inputs:
+      landing_api:
+        type: boolean
+        required: true
+        default: false
+        description: Landing api (GraphQL)
+      landing_web:
+        type: boolean
+        required: true
+        default: false
+        description: Landing web
+jobs:
+  # Landing web flows
+  build-landing-web:
+    name: build (landing web)
+    if: inputs.landing_web == true
+    uses: ./.github/workflows/wc-build.yml
+    with:
+      artifact_name: landing-web-artifact
+    secrets:
+      org_id: ${{ secrets.VERCEL_ORG_ID }}
+      project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
+      token: ${{ secrets.VERCEL_TOKEN }}
+  
+  deploy-lending-web:
+    name: deploy (landing web)
+    needs: build-landing-web
+    uses: ./.github/workflows/wc-deploy.yml
+    with:
+      artifact_name: landing-web-artifact
+    secrets:
+      org_id: ${{ secrets.VERCEL_ORG_ID }}
+      project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
+      token: ${{ secrets.VERCEL_TOKEN }}
+  
+  # Landing api flows
+  build-landing-api:
+    name: build (landing api)
+    if: inputs.landing_api == true
+    uses: ./.github/workflows/wc-build.yml
+    with:
+      artifact_name: landing-api-artifact
+    secrets:
+      org_id: ${{ secrets.VERCEL_ORG_ID }}
+      project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
+      token: ${{ secrets.VERCEL_TOKEN }}
+
+  deploy-lending-api:
+    name: deploy (landing api)
+    needs: build-landing-api
+    uses: ./.github/workflows/wc-deploy.yml
+    with:
+      artifact_name: landing-api-artifact
+    secrets:
+      org_id: ${{ secrets.VERCEL_ORG_ID }}
+      project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
+      token: ${{ secrets.VERCEL_TOKEN }}
