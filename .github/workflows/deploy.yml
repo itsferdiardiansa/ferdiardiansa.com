@@ -50,7 +50,7 @@ jobs:
   
   # Landing api flows
   build-landing-api:
-    name: build (landing api) - ${{ github.ref }}
+    name: build (landing api)
     if: inputs.landing_api == true
     uses: ./.github/workflows/wc-build.yml
     with:
