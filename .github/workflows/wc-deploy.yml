@@ -1,8 +1,11 @@
-name: Build
+name: wc-deploy
 on: 
   workflow_call:
     inputs:
       artifact_name:
+        required: true
+        type: string
+      environment:
         required: true
         type: string
     secrets:
@@ -28,4 +31,4 @@ jobs:
           path: .vercel
       
       - name: Deploy
-        run:  vercel deploy --token=${{ secrets.token }}
+        run:  vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }}
