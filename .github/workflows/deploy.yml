@@ -1,7 +1,9 @@
-name: Preview Deploy
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+name: Deploy
 on:
+  push:
+    branches:
+      - main
+      - staging
   workflow_dispatch:
     inputs:
       landing_api:
@@ -14,6 +16,8 @@ on:
         required: true
         default: false
         description: Landing web
+      environment:
+        type: environment
 jobs:
   # Landing web flows
   build-landing-web:
@@ -40,7 +44,7 @@ jobs:
   
   # Landing api flows
   build-landing-api:
-    name: build (landing api)
+    name: build (landing api) - ${{ inputs.environment }}
     if: inputs.landing_api == true
     uses: ./.github/workflows/wc-build.yml
     with:

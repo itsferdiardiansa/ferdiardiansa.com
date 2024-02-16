@@ -1,4 +1,4 @@
-name: Build
+name: wc-build
 on: 
   workflow_call:
     inputs:
@@ -39,3 +39,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact_name }}
+          path: .vercel

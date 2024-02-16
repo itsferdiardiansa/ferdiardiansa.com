@@ -1,4 +1,4 @@
-name: Build
+name: wc-deploy
 on: 
   workflow_call:
     inputs:
