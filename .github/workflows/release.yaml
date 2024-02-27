@@ -1,9 +1,6 @@
 name: Release
-run-name: Release ${{ inputs.tag }} ${{ inputs.ref }}
+run-name: 'release: ${{ inputs.tag }} ${{ inputs.ref }}'
 on:
-  # push:
-  #   branches:
-  #     - 'ci/**'
   workflow_dispatch:
     inputs:
       tag:
