@@ -79,4 +79,4 @@ const copyCoverageReports = async (groupDirName, currentPath) => {
     // ---- Merge coverage reports ----
     execSync('npx nyc report', { stdio: 'inherit' })
   })
-})((dirs = ['apps', 'packages']))
+})((dirs = ['packages']))
