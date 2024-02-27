@@ -23,10 +23,9 @@ jobs:
       - name: Download coverage reports artifact
         uses: dawidd6/action-download-artifact@v3
         with:
-          name: ${{ vars.COVERAGE_KEY }}
+          name: ${{ vars.COVERAGE_NAME }}
           path: ${{ vars.COVERAGE_PATH }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: test-coverage.yml
+          workflow: test-coverage.yaml
           search_artifacts: true
 
       - name: Generate a sonar configuration
