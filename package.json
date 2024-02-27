@@ -11,7 +11,9 @@
     "lint": "pnpm nx run-many -t lint",
     "lint:fix": "pnpm nx run-many -t lint:fix",
     "test": "pnpm nx run-many -t test",
-    "test:coverage": "pnpm nx run-many -t test:coverage"
+    "test:coverage": "pnpm nx run-many -t test:coverage",
+    "generate-coverage": "node ./scripts/generate-coverage.js",
+    "generate-sonar-properties": "./scripts/generate-sonar-properties.sh"
   },
   "private": true,
   "devDependencies": {

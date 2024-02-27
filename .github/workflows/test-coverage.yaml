@@ -24,7 +24,7 @@ jobs:
 
       - name: Generate coverage reports
         run: |
-          pnpm run test:coverage
+          pnpm run generate-coverage
           ls -l
 
       - name: Upload coverage reports artifact
