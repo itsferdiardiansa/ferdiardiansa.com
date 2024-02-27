@@ -1,0 +1,12 @@
+{
+  "extends": "@oxcyn/ts-config/base.json",
+  "compilerOptions": {
+    "importHelpers": false,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "exclude": [
+    "dist",
+    "src/**/index.ts"
+  ]
+}
