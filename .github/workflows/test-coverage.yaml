@@ -1,9 +1,8 @@
 name: Coverage Test
 on:
   pull_request:
-    types: [opened, reopened]
-  branches:
-    - main
+    branches:
+      - main
 permissions:
   actions: read
   contents: read
@@ -25,7 +24,7 @@ jobs:
 
       - name: Generate coverage reports
         run: |
-          pnpm run generate-coverage
+          pnpm run test:coverage
           ls -l
 
       - name: Upload coverage reports artifact
