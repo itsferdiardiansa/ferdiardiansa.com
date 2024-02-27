@@ -1,13 +1,10 @@
-name: Coverage Test
+name: Test Coverage
 on:
   pull_request:
     branches:
       - main
-permissions:
-  actions: read
-  contents: read
 jobs:
-  test:
+  coverage-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,22 +29,3 @@ jobs:
         with:
           name: ${{ vars.COVERAGE_NAME }}
           path: ${{ vars.COVERAGE_PATH }}
-  upload-coverage:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Download coverage reports artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ vars.COVERAGE_NAME }}
-          path: ${{ vars.COVERAGE_PATH }}
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        env:
-          slug: itsferdiardiansa/Oxcyn
-        with:
-          files: ${{ vars.COVERAGE_FILE_JSON }}
-          token: ${{ secrets.CODECOV_TOKEN }}
