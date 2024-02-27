@@ -3,8 +3,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "**.json"
+      - "docs/**"
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
 permissions:
   contents: read
 jobs:
@@ -20,10 +23,11 @@ jobs:
       - name: Download coverage reports artifact
         uses: dawidd6/action-download-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          workflow: ci.yml
           name: ${{ vars.COVERAGE_KEY }}
           path: ${{ vars.COVERAGE_PATH }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: test-coverage.yml
+          search_artifacts: true
 
       - name: Generate a sonar configuration
         env:
