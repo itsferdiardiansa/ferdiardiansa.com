@@ -4,7 +4,6 @@ on:
     branches-ignore:
       - main
       - staging
-      - release/*
 permissions:
   actions: read
   contents: read
