@@ -38,6 +38,10 @@
     "apps/*",
     "packages/*"
   ],
+  "engines": {
+		"pnpm": ">=8.6.9",
+		"node": ">=18.16.0"
+	},
   "pnpm": {
     "default": "7.3.0"
   },
