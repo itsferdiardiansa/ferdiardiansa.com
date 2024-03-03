@@ -61,6 +61,8 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1
 
+  packages/@types/oxcyn: {}
+
   packages/config/eslint: {}
 
   packages/config/ts: {}
@@ -70,6 +72,9 @@ importers:
       '@oxcyn/ts-config':
         specifier: workspace:^
         version: link:../config/ts
+      '@types/oxcyn':
+        specifier: workspace:^
+        version: link:../@types/oxcyn
       firebase:
         specifier: ^10.7.1
         version: 10.7.1
@@ -80,6 +85,9 @@ importers:
       '@types/node':
         specifier: ^20.10.6
         version: 20.11.2
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
 
   packages/utils:
     dependencies:
