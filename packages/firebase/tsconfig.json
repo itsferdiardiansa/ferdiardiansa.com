@@ -1,0 +1,3 @@
+{
+  "extends": "@oxcyn/ts-config/base.json",
+}
