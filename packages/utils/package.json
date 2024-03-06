@@ -8,8 +8,8 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prebuild": "pnpm clear && rimraf dist",
-    "build": "rimraf dist && tsc",
+    "prebuild": "rimraf dist",
+    "build": "tsc",
     "dev": "ts-node-dev --respawn --watch --cls --files src/index.ts",
     "test": "jest --passWithNoTests",
     "test:watch": "pnpm run test --watch --verbose=false",
