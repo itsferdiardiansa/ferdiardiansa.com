@@ -8,7 +8,7 @@ on:
         required: true
         default: false
         description: Landing api (GraphQL)
-      landing_web:
+      personal_web:
         type: boolean
         required: true
         default: false
@@ -21,10 +21,10 @@ on:
           - production
 jobs:
   deploy-landing-web:
-    if: inputs.landing_web == true && (github.ref == 'refs/heads/staging' || github.refs == 'refs/heads/main')
-    uses: ./.github/workflows/wc-deploy-schema.yml
+    if: inputs.personal_web == true && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
+    uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
-      artifact_name: landing-web-artifact
+      artifact_name: personal-web-artifact
       environment: ${{ inputs.environment }}
     secrets:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
@@ -33,7 +33,7 @@ jobs:
 
   deploy-landing-api:
     if: inputs.landing_api == true && (github.ref == 'refs/heads/staging' || github.ref == 'refs/heads/main')
-    uses: ./.github/workflows/wc-deploy-schema.yml
+    uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
       artifact_name: landing-api-artifact
       environment: ${{ inputs.environment }}
