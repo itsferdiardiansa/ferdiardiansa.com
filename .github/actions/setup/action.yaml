@@ -17,7 +17,7 @@ runs:
         version: '8.6.x'
 
     - name: Use Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '21.x'
         cache: 'pnpm'
