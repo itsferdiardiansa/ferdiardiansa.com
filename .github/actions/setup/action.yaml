@@ -9,7 +9,7 @@ runs:
   using: composite
   steps:
     - name: Derive appropriate SHAs for base and head for `nx affected` commands
-      uses: nrwl/nx-set-shas@v2
+      uses: nrwl/nx-set-shas@v4
 
     - name: Install pnpm
       uses: pnpm/action-setup@v2.4.0
