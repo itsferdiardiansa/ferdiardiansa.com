@@ -1,0 +1,8 @@
+.cursor {
+  @apply w-5 h-5 fixed top-0 left-0 right-0 bottom-0 m-auto rounded-full pointer-events-none;
+  z-index: 9999;
+  transition: all 0.1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: translate(-50%, -50%);
+  background-color: var(--foreground-hex);
+  mix-blend-mode: difference;
+}

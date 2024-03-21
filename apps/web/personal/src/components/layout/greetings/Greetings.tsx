@@ -53,11 +53,11 @@ function Greetings({ isLoading }: { isLoading: boolean }) {
   }, [])
 
   useEffect(() => {
-    setMounted(true)
     setSelectedGreeting({
       id: crypto.randomUUID(),
       text: greetings[getRandomInt(greetingsLn)].split(''),
     })
+    setMounted(true)
 
     return () => {}
   }, [])
