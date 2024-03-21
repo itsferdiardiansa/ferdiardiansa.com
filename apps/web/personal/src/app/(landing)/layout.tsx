@@ -1,14 +1,12 @@
 import { type PropsWithChildren } from 'react'
-import Footer from '@/components/layout/footer/Footer'
+import Cursor from '@/components/layout/cursor'
 
 export default function LandingLayout({ children }: PropsWithChildren) {
   return (
-    <section className="h-full xl:max-w-7xl mx-auto md:py-10">
-      {/* <div className="p-4 lg:flex lg:items-center"> */}
+    <section className="h-full xl:max-w-screen-3xl mx-auto md:px-40 px-8">
       {children}
-      {/* </div> */}
 
-      {/* <Footer /> */}
+      <Cursor />
     </section>
   )
 }

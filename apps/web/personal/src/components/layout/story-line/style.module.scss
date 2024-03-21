@@ -1,0 +1,25 @@
+.storyline {
+  @apply h-full relative;
+
+  .line {
+    @apply h-full absolute -left-20 top-56;
+
+    &-inner {
+      @apply h-full opacity-10;
+      width: 1px;
+      background-color: var(--foreground-hex);
+    }
+
+    &-outer {
+      @apply h-full absolute top-0;
+      width: 2px;
+      background: rgb(20 184 166)
+        linear-gradient(0deg, #0e1212 1rem, rgba(14, 18, 18, 0.5) 20vh);
+
+      &::after {
+        @apply w-4 h-4 rounded-full overflow-hidden bg-teal-300 absolute top-0 -left-2;
+        content: '';
+      }
+    }
+  }
+}

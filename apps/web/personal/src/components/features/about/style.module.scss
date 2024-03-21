@@ -1,0 +1,23 @@
+.about {
+  @apply w-full h-screen pt-28 flex flex-col items-center justify-center;
+
+  &-wrapper {
+    @apply relative;
+  }
+
+  &-header {
+    @apply md:grid grid-cols-3 text-5xl font-bold mb-16 text-teal-300 overflow-hidden;
+
+    h2 {
+      @apply col-span-2;
+    }
+  }
+
+  &-contents {
+    @apply md:grid grid-cols-3 text-2xl text-gray-300 mb-20 overflow-hidden;
+
+    p {
+      @apply col-start-2 col-span-2;
+    }
+  }
+}

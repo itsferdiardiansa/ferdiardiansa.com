@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '~@/assets/fonts/acorn/stylesheet.scss';
+
+:root {
+  --foreground-hex: #e0eeee;
+  --foreground-rgb: rgb(0, 0, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: rgb(255, 255, 255);
+  }
+}
+
+body {
+  color: var(--foreground-hex);
+  font-family: 'Acorn', sans-serif;
+}
