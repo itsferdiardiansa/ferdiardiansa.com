@@ -29,7 +29,7 @@ importers:
         version: 1.2.2
       '@vercel/node':
         specifier: ^3.0.19
-        version: 3.0.25
+        version: 3.0.26
       '@vercel/remote-nx':
         specifier: ^2.0.0
         version: 2.0.0(nx@18.2.1)
@@ -5827,7 +5827,7 @@ packages:
   /@types/conventional-commits-parser@5.0.0:
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==}
     dependencies:
-      '@types/node': 20.11.30
+      '@types/node': 20.12.4
     dev: true
 
   /@types/graceful-fs@4.1.9:
@@ -5869,12 +5869,6 @@ packages:
 
   /@types/node@20.11.27:
     resolution: {integrity: sha512-qyUZfMnCg1KEz57r7pzFtSGt49f6RPkPBis3Vo4PbS7roQEDn22hiHzl/Lo1q4i4hDEgBJmBF/NTNg2XR0HbFg==}
-    dependencies:
-      undici-types: 5.26.5
-    dev: true
-
-  /@types/node@20.11.30:
-    resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -6150,8 +6144,8 @@ packages:
       server-only: 0.0.1
     dev: true
 
-  /@vercel/build-utils@7.10.0:
-    resolution: {integrity: sha512-Lgt95xovRE/9ISevWiToDjt0l9NX8mlMUJKLQ6b7hjMB9ARkT3y+cgdx6TJJg4qmunIS8RKRxqTjzYXMPJLnmg==}
+  /@vercel/build-utils@7.11.0:
+    resolution: {integrity: sha512-UFrx1hNIjNJJkd0NZrYfaOrmcWhQmrVsbKe9o3L9jX9J1iufG685wIZ9tFCKKC0Fa2HWbNDNzNxrE5SCAS2lyA==}
     dev: true
 
   /@vercel/build-utils@7.9.0:
@@ -6235,7 +6229,7 @@ packages:
       '@mapbox/node-pre-gyp': 1.0.11
       '@rollup/pluginutils': 4.2.1
       acorn: 8.11.3
-      acorn-import-attributes: 1.9.4(acorn@8.11.3)
+      acorn-import-attributes: 1.9.5(acorn@8.11.3)
       async-sema: 3.1.1
       bindings: 1.5.0
       estree-walker: 2.0.2
@@ -6278,14 +6272,14 @@ packages:
       - supports-color
     dev: false
 
-  /@vercel/node@3.0.25:
-    resolution: {integrity: sha512-P1Q79xSNyxQ1a6B+x6A3icpSkgtRzOp8VF90REARB1FwfCVYOFPiwU8s0tq92XsKQ0KXnw4eokkebEp3wERr8Q==}
+  /@vercel/node@3.0.26:
+    resolution: {integrity: sha512-PoyacnoylwpE3+7RFUVHJlbPqtneTCEJVXXx4n8g9ARgUDSRSCwFpJOhiFQon2sS2YtfCzsJa29Z9dAZQedDcQ==}
     dependencies:
       '@edge-runtime/node-utils': 2.3.0
       '@edge-runtime/primitives': 4.1.0
       '@edge-runtime/vm': 3.2.0
       '@types/node': 14.18.33
-      '@vercel/build-utils': 7.10.0
+      '@vercel/build-utils': 7.11.0
       '@vercel/error-utils': 2.0.2
       '@vercel/nft': 0.26.4
       '@vercel/static-config': 3.0.0
@@ -6440,8 +6434,8 @@ packages:
   /abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
 
-  /acorn-import-attributes@1.9.4(acorn@8.11.3):
-    resolution: {integrity: sha512-dNIX/5UEnZvVL94dV2scl4VIooK36D8AteP4xiz7cPKhDbhLhSuWkzG580g+Q7TXJklp+Z21SiaK7/HpLO84Qg==}
+  /acorn-import-attributes@1.9.5(acorn@8.11.3):
+    resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
     peerDependencies:
       acorn: ^8
     dependencies:
