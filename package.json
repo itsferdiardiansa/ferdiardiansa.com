@@ -50,6 +50,6 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "vercel": "^33.5.0"
+    "vercel": "^34.0.0"
   }
 }

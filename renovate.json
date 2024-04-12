@@ -5,8 +5,7 @@
   ],
   "automerge": true,
   "schedule": [
-    "before 2am on Saturday",
-    "after 5am on Thursday"
+    "before 4am on the first day of the month"
   ],
   "packageRules": [
     {
