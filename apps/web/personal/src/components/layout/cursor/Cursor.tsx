@@ -10,7 +10,7 @@ export default function Cursor() {
   const y = useMotionValue(0)
 
   const springConfig = useMemo(
-    () => ({ type: 'spring', damping: 30, stiffness: 100 }),
+    () => ({ type: 'spring', damping: 30, stiffness: 600 }),
     []
   )
 

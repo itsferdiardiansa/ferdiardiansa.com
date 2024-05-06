@@ -1,95 +1,36 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
-import { useGSAP } from '@gsap/react'
-import SplitType from 'split-type'
-
-import style from './style.module.scss'
-
-type AboutProps = {
-  about: string
-}
-
-export default function About({ about }: AboutProps) {
-  const [filteredText, setFilteredText] = useState<string>('')
-  const [mounted, setMounted] = useState<boolean>(false)
-  const titleRef = useRef(null)
-  const containerRef = useRef(null)
-  const contentRef = useRef(null)
-  const contentCharRefs = useRef(new Array())
-
-  const tl = useMemo(() => {
-    return gsap.timeline({
-      repeatDelay: 1,
-    })
-  }, [])
-
-  useEffect(() => {
-    if (!contentRef.current) return
-
-    const text = SplitType.create(contentRef.current, { types: 'lines' })
-    setMounted(true)
-
-    gsap.registerPlugin(ScrollTrigger)
-  }, [])
-
-  useGSAP(
-    () => {
-      // const tl = gsap.timeline({
-      //   delay: 1,
-      //   scrollTrigger: {
-      //     trigger: containerRef.current,
-      //     start: "top 10%",
-      //     end: "top 5%",
-      //     scrub: true,
-      //   }
-      // })
-      // tl
-      //   .from(titleRef.current, {
-      //     y: -100,
-      //     duration: 3.3,
-      //     opacity: 0,
-      //   })
-      //   .fromTo(contentRef.current, {
-      //     y: 100,
-      //     opacity: 0
-      //   }, {
-      //     y: 0,
-      //     scaleY: 1,
-      //     opacity: 1,
-      //     duration: 3,
-      //     stagger: 2
-      //   })
-    },
-    { scope: containerRef }
-  )
-
+export default function About() {
   return (
-    <div ref={containerRef} className={style['about']}>
-      <div className={style['about-wrapper']}>
-        <div className={style['about-header']}>
-          <h2 ref={titleRef}>
-            {/* &#123;me&#125; */}
-            I&apos;m a Software Engineer working remotely from Jakarta,
-            Indonesia.
-          </h2>
-        </div>
-
-        <div ref={contentRef} className={style['about-contents']}>
-          {about}
-          {/* <p> */}
-          {/* {!!filteredText?.length &&
-              filteredText.map((char, index) => (
-                <span
-                  key={index}
-                  ref={element => contentCharRefs.current.push(element)}
-                >
-                  {char}
-                </span>
-              ))} */}
-          {/* </p> */}
-        </div>
+    <section
+      id="about"
+      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+      aria-label="About me"
+    >
+      <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only flex items-center gap-4">
+          About
+          <span className="w-full border-1.5 border-t border-slate-200 block"></span>
+        </h2>
       </div>
-    </div>
+      <div>
+        <p className="mb-4">
+          Over the past 5+ years, I've worked in various areas of digital
+          company, including front-end development, and Web UI/UX. I'm proud to
+          have worn many hats. Fast-forward to today, and I&apos;ve had the
+          privilege of building variety software for many start-up huge
+          corporations digital product.
+        </p>
+        <p className="mb-4">
+          My main focus these days is building accessible user interfaces for
+          any clients that I&apos;m working for. I most enjoy building software
+          in the sweet spot where design and engineering meet — things that look
+          good but are also built well under the hood.
+        </p>
+        <p>
+          When I&apos;m not in front of the computer, I&apos;m usually playing
+          console games, hanging out with friends, or wandering around the house
+          looking for peace.
+        </p>
+      </div>
+    </section>
   )
 }
