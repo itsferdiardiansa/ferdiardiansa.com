@@ -4,8 +4,9 @@ import style from './style.module.scss'
 
 export interface TimelineItemProps {
   company: string
-  title: string
+  title: string | null
   time: string
+  description: string | null
   customStyle: {
     gridColumn: string
   }

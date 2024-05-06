@@ -1,23 +1,61 @@
 .about {
-  @apply w-full h-screen pt-28 flex flex-col items-center justify-center;
+  @apply relative w-full pt-28 mx-auto md:px-40 px-8;
+  background-color: white;
+  min-height: 100vh;
+  // background: url("~@/assets/sketch/ny-city.jpg") center center no-repeat;
 
   &-wrapper {
-    @apply relative;
+    @apply flex;
+    gap: 1rem;
   }
 
-  &-header {
-    @apply md:grid grid-cols-3 text-5xl font-bold mb-16 text-teal-300 overflow-hidden;
+  &-bg {
+    @apply w-full h-auto flex items-center justify-center;
+    flex: 1;
 
-    h2 {
-      @apply col-span-2;
+    .city {
+      @apply w-full inline-block;
     }
+
+    &-backdrop {
+      @apply absolute top-0 left-0;
+    }
+
+    &-cloud {
+      @apply absolute top-0 left-0;
+      @apply z-50;
+    }
+
+    svg {
+      @apply w-9/12;
+    }
+    // svg {
+    //   @apply w-full opacity-50;
+    // }
   }
 
   &-contents {
-    @apply md:grid grid-cols-3 text-2xl text-gray-300 mb-20 overflow-hidden;
+    flex: 0.5;
 
-    p {
-      @apply col-start-2 col-span-2;
+    .contents-header {
+      @apply text-5xl font-bold mb-16 overflow-hidden flex items-center gap-8;
+
+      h2 {
+        @apply col-span-2 text-slate-950 whitespace-nowrap;
+      }
+
+      &-line {
+        @apply w-full h-1 bg-black block;
+        // flex: .4;
+      }
+    }
+
+    .contents-article {
+      @apply text-lg text-gray-800 mb-20 overflow-hidden;
+
+      p {
+        @apply col-start-2 col-span-2;
+      }
     }
   }
 }
