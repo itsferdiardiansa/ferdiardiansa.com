@@ -1,14 +1,14 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import Greetings from '@/components/layout/greetings'
+// import Greetings from '@/components/layout/greetings'
 
 import Banner from '@/components/features/banner'
 // import StoryLine from '@/components/layout/story-line'
 import About from '@/components/features/about'
 import CareerTimeline from '@/components/features/career-timeline'
 // import Collaboration from '@/components/features/collaboration'
-import Gap from '@/components/layout/gap'
+// import Gap from '@/components/layout/gap'
 
 import { CONTENTS } from '@/constants/cache/contents'
 
@@ -30,14 +30,14 @@ export default function Home() {
 
   return (
     <>
-      <Greetings isLoading={isLoading} />
+      {/* <Greetings isLoading={isLoading} /> */}
 
       {!isLoading && (
         <>
           {/* <StoryLine> */}
           <Banner {...responseData.data.banner} />
 
-          <Gap />
+          {/* <Gap /> */}
 
           {/* <About about={responseData.data.about} /> */}
 

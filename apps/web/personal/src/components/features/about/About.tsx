@@ -13,10 +13,10 @@ export default function About() {
       </div>
       <div>
         <p className="mb-4">
-          Over the past 5+ years, I've worked in various areas of digital
-          company, including front-end development, and Web UI/UX. I'm proud to
-          have worn many hats. Fast-forward to today, and I&apos;ve had the
-          privilege of building variety software for many start-up huge
+          Over the past 5+ years, I&apos;ve worked in various areas of digital
+          company, including front-end development, and Web UI/UX. I&apos;m
+          proud to have worn many hats. Fast-forward to today, and I&apos;ve had
+          the privilege of building variety software for many start-up huge
           corporations digital product.
         </p>
         <p className="mb-4">

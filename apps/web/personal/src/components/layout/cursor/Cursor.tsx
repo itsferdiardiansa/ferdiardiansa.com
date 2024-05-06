@@ -34,7 +34,7 @@ export default function Cursor() {
     return () => {
       document.removeEventListener('mousemove', handleCursorMove)
     }
-  }, [])
+  })
 
   return (
     <motion.div
