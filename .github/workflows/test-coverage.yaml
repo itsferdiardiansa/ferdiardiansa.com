@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - main
+      - 'release/**'
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
