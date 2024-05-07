@@ -4,9 +4,10 @@ import { unstable_cache as cache } from 'next/cache'
 import { getBaseMetadata } from '@/firestore/collections/metadata'
 import { BASE_METADATA } from '@/constants/cache/metadata'
 
-import Providers from './providers'
+import TanstackQueryProviders from '@/contexts/tanstack-query/tanstack-query.provider'
+import LenisProviders from '@/contexts/lenis/lenis.provider'
 
-import './globals.css'
+import './globals.scss'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 2629800 // a month
@@ -30,9 +31,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className="dark:bg-primary bg-black	h-screen">
-        <Providers>{children}</Providers>
-      </body>
+      <LenisProviders>
+        <body className="bg-[#121315]">
+          <TanstackQueryProviders>{children}</TanstackQueryProviders>
+        </body>
+      </LenisProviders>
     </html>
   )
 }

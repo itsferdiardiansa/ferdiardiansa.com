@@ -1,4 +1,4 @@
-export default [
+const greetings = [
   'Bonjour',
   '¿Qué tal?',
   '你好',
@@ -9,3 +9,5 @@ export default [
   'Halo',
   'السلام عليكم',
 ]
+
+export default greetings
