@@ -1,11 +1,5 @@
 import { getDocumentCollections } from '@oxcyn/firebase'
-
-export type Contents = {
-  banner: {
-    title: string
-    subTitle: string
-  }
-}
+import { type Contents } from '@/types/contents'
 
 export async function getContents() {
   const response = getDocumentCollections<Contents>(
