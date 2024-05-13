@@ -20,7 +20,6 @@ const getCachedContents = cache(
 export default async function LandingPage() {
   const { data } = await getCachedContents()
 
-  console.log(data)
   return (
     <>
       <BasicInfo basicInfo={data.basicInfo} />
