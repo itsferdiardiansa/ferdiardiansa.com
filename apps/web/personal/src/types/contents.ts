@@ -11,10 +11,10 @@ type About = {
 }
 
 export type CareerTimeline = {
-  title: string
-  subTitle: string
+  title: string | null
+  subTitle: string | null
   description: string
-  link: string
+  link: string | null
   time: string
   techStacks: string[]
 }
