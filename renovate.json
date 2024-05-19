@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "automerge": true,
+  "schedule": [
+    "before 4am on the first day of the month"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["node", "npm"],
+      "enabled": false
+    },
+    {
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "^14"
+    },
+    {
+      "groupName": "Oxcyn packages",
+      "matchPackagePrefixes": [
+        "@oxcyn/"
+      ],
+      "enabled": false
+    }
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/test/**",
+    "**/tests/**",
+    "**/workflows/**"
+  ]
+}

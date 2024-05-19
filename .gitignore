@@ -8,9 +8,6 @@ tmp
 # dependencies
 node_modules
 
-# npm
-package-lock.json
-
 # IDEs and editors
 /.idea
 .project
@@ -42,14 +39,3 @@ testem.log
 Thumbs.db
 
 .nx/cache
-
-# Coverage
-.nyc_reports
-coverage
-
-# Sonarqube
-sonar-project.properties
-.vercel
-
-# Env
-.env

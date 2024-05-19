@@ -1,10 +1,11 @@
 {
-  "private": true,
   "name": "@types/oxcyn",
-  "version": "1.0.0",
-  "description": "",
-  "main": "",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Types for Oxcyn TS",
   "types": "types/index.d.ts",
+  "author": "Ferdi Ardiansa",
+  "license": "ISC",
   "keywords": [
     "typescript",
     "oxcyn-types"
@@ -12,7 +13,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/itsferdiardiansa/Oxcyn.git"
-  },
-  "author": "Ferdi Ardiansa",
-  "license": "ISC"
+  }
 }
