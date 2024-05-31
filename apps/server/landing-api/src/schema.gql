@@ -1,0 +1,32 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""
+about-me
+"""
+type About {
+  title: String!
+  items: [String!]!
+  lastUpdate: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  about: About!
+}
+
+type Mutation {
+  updateAbout(newAboutData: NewAboutInput!): About!
+}
+
+input NewAboutInput {
+  title: String!
+  items: [String!]!
+}
