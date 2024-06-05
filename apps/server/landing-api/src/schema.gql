@@ -8,9 +8,10 @@ directive @upper on FIELD_DEFINITION
 about-me
 """
 type About {
+  _id: ID!
   title: String!
   items: [String!]!
-  lastUpdate: DateTime!
+  lastUpdated: DateTime!
 }
 
 """
@@ -23,10 +24,14 @@ type Query {
 }
 
 type Mutation {
-  updateAbout(newAboutData: NewAboutInput!): About!
+  """
+  Update about data
+  """
+  updateAbout(aboutData: UpdateAboutInput!): About!
 }
 
-input NewAboutInput {
+input UpdateAboutInput {
+  _id: ID!
   title: String!
   items: [String!]!
 }

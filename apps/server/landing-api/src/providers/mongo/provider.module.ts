@@ -8,6 +8,7 @@ import { GlobalConfigModule } from '@/config/config.module'
   imports: [
     MongooseModule.forRootAsync({
       imports: [GlobalConfigModule],
+      inject: [MongoDBConfigService],
       useFactory: async (mongoDBConfigService: MongoDBConfigService) => {
         return {
           dbName: mongoDBConfigService.name,
@@ -17,7 +18,6 @@ import { GlobalConfigModule } from '@/config/config.module'
           retryWrites: true,
         }
       },
-      inject: [MongoDBConfigService],
     }),
   ],
 })

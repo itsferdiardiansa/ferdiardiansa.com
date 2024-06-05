@@ -6,7 +6,6 @@ import DatabaseConfigurations from './database/mongo/configuration'
 
 import { AppConfigService } from './app/config.service'
 import { MongoDBConfigService } from './database/mongo/config.service'
-// import { AppConfigService } from "./config.service";
 
 @Module({
   imports: [

@@ -1,4 +1,4 @@
-import { ApolloDriver } from '@nestjs/apollo'
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { DirectiveLocation, GraphQLDirective } from 'graphql'
@@ -6,18 +6,37 @@ import { join } from 'path'
 
 @Module({
   imports: [
-    GraphQLModule.forRoot({
+    GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: true,
-      buildSchemaOptions: {
-        directives: [
-          new GraphQLDirective({
-            name: 'upper',
-            locations: [DirectiveLocation.FIELD_DEFINITION],
-          }),
-        ],
-      },
+      useFactory: () => ({
+        playground: true,
+        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        buildSchemaOptions: {
+          directives: [
+            new GraphQLDirective({
+              name: 'upper',
+              locations: [DirectiveLocation.FIELD_DEFINITION],
+            }),
+          ],
+        },
+        formatError: error => {
+          const originalError = error.extensions?.originalError as {
+            message: string
+          }
+
+          if (!originalError) {
+            return {
+              message: error.message,
+              code: error.extensions?.code,
+            }
+          }
+
+          return {
+            message: originalError.message,
+            code: error.extensions?.code,
+          }
+        },
+      }),
     }),
   ],
 })

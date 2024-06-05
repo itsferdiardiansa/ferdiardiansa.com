@@ -1,20 +1,22 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
-import { About } from './models/about.models'
-import { NewAboutInput } from './dto/new-about.input'
+import { About } from './schema/about.models'
+import { UpdateAboutInput } from './dto/update-about.input'
+import { AboutService } from './about.service'
+// import { MutationCommonPayload } from '@/common/schema/common-payload'
 
-@Resolver((of: any) => About)
+@Resolver(() => About)
 export class AboutResolver {
-  @Query(returns => About)
+  constructor(private readonly aboutService: AboutService) {}
+
+  @Query(() => About)
   about() {
-    return {
-      title: 'About Me',
-      items: [],
-      lastUpdate: new Date(),
-    }
+    return this.aboutService.find()
   }
 
-  @Mutation(returns => About)
-  updateAbout(@Args('newAboutData') aboutData: NewAboutInput) {
-    return []
+  @Mutation(() => About, {
+    description: 'Update about data',
+  })
+  updateAbout(@Args('aboutData') aboutData: UpdateAboutInput) {
+    return this.aboutService.update(aboutData)
   }
 }
