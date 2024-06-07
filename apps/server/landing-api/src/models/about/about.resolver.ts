@@ -2,7 +2,6 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql'
 import { About } from './schema/about.models'
 import { UpdateAboutInput } from './dto/update-about.input'
 import { AboutService } from './about.service'
-// import { MutationCommonPayload } from '@/common/schema/common-payload'
 
 @Resolver(() => About)
 export class AboutResolver {

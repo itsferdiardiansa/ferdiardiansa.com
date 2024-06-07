@@ -9,7 +9,15 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "collectCoverageFrom": [
-    "**/*.(t|j)s"
+    "**/*.(t|j)s",
+    "!**/dto/**",
+    "!**/*.(module|models).(t|j)s",
+    "!**/main.(t|j)s"
+  ],
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/config",
+    "<rootDir>/common",
+    "<rootDir>/providers"
   ],
   "coverageDirectory": "../coverage",
   "testEnvironment": "node",

@@ -44,7 +44,7 @@ describe('models/AboutService', () => {
       .spyOn(model, 'findByIdAndUpdate')
       .mockReturnValueOnce(mock as any)
 
-    service.update(mock as any)
+    service.update(mock)
 
     const [mockResult] = spy.mock.results
 
