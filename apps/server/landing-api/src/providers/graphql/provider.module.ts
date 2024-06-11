@@ -9,7 +9,8 @@ import { join } from 'path'
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
       useFactory: () => ({
-        playground: true,
+        playground: process.env.NODE_ENV === 'development',
+        path: '/gql',
         autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
         buildSchemaOptions: {
           directives: [
