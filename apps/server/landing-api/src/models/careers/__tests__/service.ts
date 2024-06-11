@@ -1,33 +1,33 @@
-import { Test, TestingModule } from '@nestjs/testing'
-import { BasicInfoService } from '../basic-info.service'
-import { BasicInfo } from '../schema/basic-info.models'
+import { Test } from '@nestjs/testing'
+import { getModelToken } from '@nestjs/mongoose'
 import { Model, Types } from 'mongoose'
+import { CareersService } from '../careers.service'
+import { Careers } from '../schema/careers.models'
 import { mockProvider } from '@/libs/test-helper'
 import * as mockData from './mockData.json'
-import { getModelToken } from '@nestjs/mongoose'
 
 describe('models/BasicInfo', () => {
-  let service: BasicInfoService
-  let model: Model<BasicInfo>
+  let service: CareersService
+  let model: Model<Careers>
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
-        BasicInfoService,
-        mockProvider<typeof BasicInfo, typeof mockData>(BasicInfo, mockData),
+        CareersService,
+        mockProvider<typeof Careers, typeof mockData>(Careers, mockData),
       ],
     }).compile()
 
-    service = module.get<BasicInfoService>(BasicInfoService)
-    model = module.get<Model<BasicInfo>>(getModelToken(BasicInfo.name))
+    service = module.get<CareersService>(CareersService)
+    model = module.get<Model<Careers>>(getModelToken(Careers.name))
   })
 
   it('should be defined', () => {
     expect(service).toBeDefined()
   })
 
-  it('should return basic info', () => {
-    jest.spyOn(model, 'findOne').mockReturnValueOnce(mockData as any)
+  it('should return careers', () => {
+    jest.spyOn(model, 'find').mockReturnValueOnce(mockData as any)
 
     const collections = service.find()
 
@@ -36,8 +36,8 @@ describe('models/BasicInfo', () => {
 
   it('should update data by given id', () => {
     const mock = {
-      _id: new Types.ObjectId(),
-      ...mockData,
+      ...(mockData as unknown as Careers),
+      id: new Types.ObjectId(),
     }
 
     const spy = jest

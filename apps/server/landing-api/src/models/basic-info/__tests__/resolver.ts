@@ -46,7 +46,7 @@ describe('models/BasicInfoResolver', () => {
     expect(collection).toMatchObject(DATA)
   })
 
-  it('should update the data and return about data', () => {
+  it('should update the data and return basicInfo data', () => {
     const inputData = {
       _id: new Types.ObjectId(),
       name: 'Ferdi Ardiansa',

@@ -28,9 +28,28 @@ type BasicInfo {
   lastUpdated: DateTime!
 }
 
+type ReferencesType {
+  label: String!
+  link: String!
+  linkType: String!
+}
+
+type Careers {
+  _id: ID!
+  description: String
+  link: String
+  title: String!
+  subTitle: String
+  time: String!
+  techStacks: [String!]!
+  references: [ReferencesType!]!
+  lastUpdated: DateTime!
+}
+
 type Query {
   about: About!
   basicInfo: BasicInfo!
+  careers: [Careers!]!
 }
 
 type Mutation {
@@ -39,6 +58,9 @@ type Mutation {
   """
   updateAbout(aboutData: UpdateAboutInput!): About!
   updateBasicInfo(basicInfoData: UpdateBasicInfoInput!): BasicInfo!
+  addCareer(inputData: CreateCareerInput!): Careers!
+  updateCareer(inputData: UpdateCareerInput!): Careers!
+  deleteCareer(inputData: DeleteCareerInput!): Careers!
 }
 
 input UpdateAboutInput {
@@ -53,4 +75,35 @@ input UpdateBasicInfoInput {
   name: String!
   pronouns: String!
   role: String!
+}
+
+input CreateCareerInput {
+  description: String
+  link: String
+  title: String!
+  subTitle: String
+  time: String!
+  techStacks: [String!]!
+  references: [ReferencesInput!]
+}
+
+input ReferencesInput {
+  label: String!
+  link: String!
+  linkType: String!
+}
+
+input UpdateCareerInput {
+  description: String
+  link: String
+  title: String!
+  subTitle: String
+  time: String!
+  techStacks: [String!]!
+  references: [ReferencesInput!]
+  id: ID!
+}
+
+input DeleteCareerInput {
+  id: ID!
 }

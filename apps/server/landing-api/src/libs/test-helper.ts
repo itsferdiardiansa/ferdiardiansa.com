@@ -9,6 +9,7 @@ export function mockProvider<T extends { name: string }, S>(
     useValue: {
       new: jest.fn().mockResolvedValue(mockData),
       constructor: jest.fn().mockResolvedValue(mockData),
+      find: jest.fn(),
       findOne: jest.fn(),
       findByIdAndUpdate: jest.fn(),
       create: jest.fn(),

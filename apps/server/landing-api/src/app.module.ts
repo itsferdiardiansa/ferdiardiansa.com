@@ -10,6 +10,7 @@ import { GlobalConfigModule } from '@/config/config.module'
 // Models
 import { AboutModule } from '@/models/about/about.module'
 import { BasicInfoModule } from './models/basic-info/basic-info.module'
+import { CareersModule } from './models/careers/careers.module'
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { BasicInfoModule } from './models/basic-info/basic-info.module'
     // Models
     AboutModule,
     BasicInfoModule,
+    CareersModule,
   ],
+  providers: [],
 })
 export class AppModule {}
