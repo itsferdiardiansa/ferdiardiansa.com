@@ -9,6 +9,7 @@ import { GlobalConfigModule } from '@/config/config.module'
 
 // Models
 import { AboutModule } from '@/models/about/about.module'
+import { BasicInfoModule } from './models/basic-info/basic-info.module'
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AboutModule } from '@/models/about/about.module'
 
     // Models
     AboutModule,
+    BasicInfoModule,
   ],
 })
 export class AppModule {}
