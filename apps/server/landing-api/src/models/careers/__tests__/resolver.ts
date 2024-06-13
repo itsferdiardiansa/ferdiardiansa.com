@@ -18,7 +18,7 @@ const careersServiceMock = {
   find: jest.fn((): Careers[] => DATA),
   update: jest.fn(
     (inputData: UpdateCareerInput): Careers => ({
-      ...inputData,
+      ...(inputData as unknown as Careers),
       _id: new Types.ObjectId(),
       lastUpdated: new Date(),
     })

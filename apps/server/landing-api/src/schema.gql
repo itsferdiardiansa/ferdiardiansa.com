@@ -94,14 +94,14 @@ input ReferencesInput {
 }
 
 input UpdateCareerInput {
+  id: ID!
+  title: String
+  subTitle: String
+  time: String
+  techStacks: [String!]
   description: String
   link: String
-  title: String!
-  subTitle: String
-  time: String!
-  techStacks: [String!]!
   references: [ReferencesInput!]
-  id: ID!
 }
 
 input DeleteCareerInput {
