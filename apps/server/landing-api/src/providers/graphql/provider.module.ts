@@ -2,16 +2,16 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { DirectiveLocation, GraphQLDirective } from 'graphql'
-import { join } from 'path'
 
+const isDevelopment = process.env.NODE_ENV === 'development'
 @Module({
   imports: [
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
       useFactory: () => ({
-        playground: process.env.NODE_ENV === 'development',
+        playground: isDevelopment,
         path: '/gql',
-        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        autoSchemaFile: true, // Change this to avoid file permission on Vercel Serverless Function
         buildSchemaOptions: {
           directives: [
             new GraphQLDirective({
