@@ -4,9 +4,7 @@
 
 directive @upper on FIELD_DEFINITION
 
-"""
-about-me
-"""
+"""about-me"""
 type About {
   _id: ID!
   title: String!
@@ -55,6 +53,7 @@ type Answer {
 type Question {
   _id: ID!
   text: String!
+  lastUpdated: DateTime
   answers: [Answer!]!
 }
 
@@ -63,18 +62,26 @@ type Query {
   basicInfo: BasicInfo!
   careers: [Careers!]!
   questions: [Question!]!
+  getQuestionById(id: String!): Question
+  filterQuestions(inputData: FilterQuestionInput!): [Question!]!
   answers: [Answer!]!
 }
 
+input FilterQuestionInput {
+  _id: ID
+  text: String
+}
+
 type Mutation {
-  """
-  Update about data
-  """
+  """Update about data"""
   updateAbout(aboutData: UpdateAboutInput!): About!
   updateBasicInfo(basicInfoData: UpdateBasicInfoInput!): BasicInfo!
   addCareer(inputData: CreateCareerInput!): Careers!
   updateCareer(inputData: UpdateCareerInput!): Careers!
   deleteCareer(inputData: DeleteCareerInput!): Careers!
+  addQuestion(inputData: CreateQuestionInput!): Question
+  updateQuestion(inputData: UpdateQuestionInput!): Question!
+  deleteQuestion(id: String!): Question!
 }
 
 input UpdateAboutInput {
@@ -120,4 +127,13 @@ input UpdateCareerInput {
 
 input DeleteCareerInput {
   id: ID!
+}
+
+input CreateQuestionInput {
+  text: String!
+}
+
+input UpdateQuestionInput {
+  id: ID!
+  text: String!
 }

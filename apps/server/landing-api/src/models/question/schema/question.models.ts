@@ -10,10 +10,14 @@ export class Question {
   _id: Types.ObjectId
 
   @Field(() => String)
-  @Prop()
+  @Prop({ required: true, unique: true })
   text: string
 
-  @Field(() => [Answer])
+  @Field(() => Date, { nullable: true })
+  @Prop({ default: new Date() })
+  lastUpdated: Date
+
+  @Field(() => [Answer], { defaultValue: [] })
   answers: Answer[]
 }
 
