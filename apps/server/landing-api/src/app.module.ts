@@ -11,6 +11,9 @@ import { GlobalConfigModule } from '@/config/config.module'
 import { AboutModule } from '@/models/about/about.module'
 import { BasicInfoModule } from './models/basic-info/basic-info.module'
 import { CareersModule } from './models/careers/careers.module'
+import { ChatModule } from './models/chat/chat.module'
+import { QuestionModule } from './models/question/question.module'
+import { AnswerModule } from './models/answer/answer.module'
 
 @Module({
   imports: [
@@ -24,6 +27,9 @@ import { CareersModule } from './models/careers/careers.module'
     AboutModule,
     BasicInfoModule,
     CareersModule,
+    ChatModule,
+    QuestionModule,
+    AnswerModule,
   ],
   providers: [],
 })
