@@ -18,7 +18,7 @@ export class QuestionService {
         $lookup: {
           from: 'answers',
           localField: '_id',
-          foreignField: 'question_id',
+          foreignField: 'question',
           as: 'answers',
         },
       },

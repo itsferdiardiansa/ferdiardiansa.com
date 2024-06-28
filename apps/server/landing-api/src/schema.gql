@@ -46,8 +46,9 @@ type Careers {
 
 type Answer {
   _id: ID!
-  question_id: ID!
+  question: Question
   text: String!
+  lastUpdated: DateTime
 }
 
 type Question {
@@ -82,6 +83,9 @@ type Mutation {
   addQuestion(inputData: CreateQuestionInput!): Question
   updateQuestion(inputData: UpdateQuestionInput!): Question!
   deleteQuestion(id: String!): Question!
+  createAnswer(inputData: BaseAnswerInput!): Answer!
+  updateAnswer(inputData: updateAnswerInput!): Answer!
+  deleteAnswer(id: String!): Answer!
 }
 
 input UpdateAboutInput {
@@ -136,4 +140,15 @@ input CreateQuestionInput {
 input UpdateQuestionInput {
   id: ID!
   text: String!
+}
+
+input BaseAnswerInput {
+  question: ID!
+  text: String!
+}
+
+input updateAnswerInput {
+  question: ID!
+  text: String!
+  id: ID!
 }
