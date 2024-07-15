@@ -55,7 +55,7 @@ createPullRequest() {
   updateVersion  
   createPullRequestTemplate
 
-  # git push origin ${tagVersion}
+  git push origin ${tagVersion}
   git push origin release/${tagVersion} -f
 
   pullRequestUrl=$(gh pr create -B main -t "release: ${tagVersion}" --body-file ./PULL_REQUEST_TEMPLATE.md)

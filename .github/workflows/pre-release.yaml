@@ -34,7 +34,7 @@ on:
         required: false
 permissions: write-all
 jobs:
-  release:
+  pre-release:
     runs-on: ubuntu-latest
     env:
       COMMIT_TAG: ${{ inputs.commit_tag }}
