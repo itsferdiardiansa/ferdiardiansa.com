@@ -1,0 +1,154 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+"""about-me"""
+type About {
+  _id: ID!
+  title: String!
+  items: [String!]!
+  lastUpdated: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type BasicInfo {
+  _id: ID!
+  description: String!
+  name: String!
+  pronouns: String!
+  role: String!
+  lastUpdated: DateTime!
+}
+
+type ReferencesType {
+  label: String!
+  link: String!
+  linkType: String!
+}
+
+type Careers {
+  _id: ID!
+  description: String
+  link: String
+  title: String!
+  subTitle: String
+  time: String!
+  techStacks: [String!]!
+  references: [ReferencesType!]!
+  lastUpdated: DateTime!
+}
+
+type Answer {
+  _id: ID!
+  question: Question
+  text: String!
+  lastUpdated: DateTime
+}
+
+type Question {
+  _id: ID!
+  text: String!
+  lastUpdated: DateTime
+  answers: [Answer!]!
+}
+
+type Query {
+  about: About!
+  basicInfo: BasicInfo!
+  careers: [Careers!]!
+  questions: [Question!]!
+  getQuestionById(id: String!): Question
+  filterQuestions(inputData: FilterQuestionInput!): [Question!]!
+  answers: [Answer!]!
+}
+
+input FilterQuestionInput {
+  _id: ID
+  text: String
+}
+
+type Mutation {
+  """Update about data"""
+  updateAbout(aboutData: UpdateAboutInput!): About!
+  updateBasicInfo(basicInfoData: UpdateBasicInfoInput!): BasicInfo!
+  addCareer(inputData: CreateCareerInput!): Careers!
+  updateCareer(inputData: UpdateCareerInput!): Careers!
+  deleteCareer(inputData: DeleteCareerInput!): Careers!
+  addQuestion(inputData: CreateQuestionInput!): Question
+  updateQuestion(inputData: UpdateQuestionInput!): Question!
+  deleteQuestion(id: String!): Question!
+  createAnswer(inputData: BaseAnswerInput!): Answer!
+  updateAnswer(inputData: updateAnswerInput!): Answer!
+  deleteAnswer(id: String!): Answer!
+}
+
+input UpdateAboutInput {
+  _id: ID!
+  title: String!
+  items: [String!]!
+}
+
+input UpdateBasicInfoInput {
+  _id: ID!
+  description: String
+  name: String!
+  pronouns: String!
+  role: String!
+}
+
+input CreateCareerInput {
+  description: String
+  link: String
+  title: String!
+  subTitle: String
+  time: String!
+  techStacks: [String!]!
+  references: [ReferencesInput!]
+}
+
+input ReferencesInput {
+  label: String!
+  link: String!
+  linkType: String!
+}
+
+input UpdateCareerInput {
+  id: ID!
+  title: String
+  subTitle: String
+  time: String
+  techStacks: [String!]
+  description: String
+  link: String
+  references: [ReferencesInput!]
+}
+
+input DeleteCareerInput {
+  id: ID!
+}
+
+input CreateQuestionInput {
+  text: String!
+}
+
+input UpdateQuestionInput {
+  id: ID!
+  text: String!
+}
+
+input BaseAnswerInput {
+  question: ID!
+  text: String!
+}
+
+input updateAnswerInput {
+  question: ID!
+  text: String!
+  id: ID!
+}
