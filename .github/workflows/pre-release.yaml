@@ -1,5 +1,5 @@
 name: Pre Release
-run-name: "pre release - ${{ inputs.workspace }}/${{ inputs.path }}"
+run-name: "pre-release: ${{ inputs.workspace }}/${{ inputs.path }}"
 env:
   GITHUB_TOKEN: ${{ github.token }}
 on:
@@ -35,6 +35,7 @@ on:
 permissions: write-all
 jobs:
   pre-release:
+    if: (startsWith(github.ref, 'refs/heads/feat/') && github.ref != 'refs/heads/main')
     runs-on: ubuntu-latest
     env:
       COMMIT_TAG: ${{ inputs.commit_tag }}
