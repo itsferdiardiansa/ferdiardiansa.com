@@ -4,7 +4,6 @@ set -euo pipefail
 
 githubBaseUrl="https://github.com/itsferdiardiansa/Oxcyn"
 workspaceName=""
-previousVersion=""
 latestVersion=""
 tagVersion=""
 tagMessage=""
@@ -21,32 +20,33 @@ Change was created by the github actions and automation script.
 "
 }
 
-createTag() {
+createAndPushTag() {
   createTagMessage
 
   echo "Create tag on ${workspaceName} workspace."
   
-  if [ -z "${COMMIT_TAG}" ]; then
-    git tag ${tagVersion} ${COMMIT_TAG} -m "${tagMessage}"
-  else
-    git tag ${tagVersion} -m "${tagMessage}"
-  fi
+  git tag ${tagVersion} -m "${tagMessage}"
 
   git push origin ${tagVersion}
 }
 
-# Create a release of the latest feature
-createRelease() {
-  compareVersion="${workspaceName}-${previousVersion}...${workspaceName}-${latestVersion}"
+# Create a release from the latest pre-release feature
+createAndPushRelease() {
+  previousVersion=$(gh release list | grep $workspaceName | awk 'NR==1{print $1}')
+  pullRequestData=$(gh pr list --state merged --json number,url --head release/${workspaceName}-${latestVersion} --limit 1)
+  compareVersion="${previousVersion}...${workspaceName}-${latestVersion}"
+
+  # Get the pull request url
+  pullRequestUrl=$(echo $pullRequestData | jq -r ".[].url")
 
   note_template="[Pull Requests](${pullRequestUrl}) | [Compare](${githubBaseUrl}/compare/${compareVersion})"
   gh release create "${tagVersion}" -p --title "${tagVersion}" -n "${note_template//BASE_REVISION/$BASE_REVISION}"
 }
 
-setLatestVersion() {
+# Get the latest release of workspace and set the variables
+setLatestRelaeseVariables() {
   pkgJson="${commands[workspace]}/${commands[path]}/package.json"
   latestVersion=$(jq -r .version ${pkgJson})
-  previousVersion="${latestVersion}"
   workspaceName=$(jq -r .name ${pkgJson})
 
   if [ -z "$latestVersion" ]; then
@@ -74,10 +74,11 @@ run() {
   echo "Running release tasks..."
 
   populateArguments "$@"
-  setLatestVersion
 
-  createTag
-  createRelease
+  setLatestRelaeseVariables
+
+  createAndPushTag
+  createAndPushRelease
 }
 
 run "$@"

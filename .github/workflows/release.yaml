@@ -16,16 +16,11 @@ on:
         description: "Type a release path directory"
         type: string
         required: true
-      commit_tag:
-        description: "Type the commit (SHA)"
-        type: string
-        required: false
 permissions: write-all
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    env:
-      COMMIT_TAG: ${{ inputs.commit_tag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,5 +35,8 @@ jobs:
       - run: echo "BASE_REVISION=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - run: gh auth setup-git
+
+      - run: git config user.name "github-actions[bot]"
+      - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - run: . ./scripts/release-tag.sh --workspace=${{ github.event.inputs.workspace }} --path=${{ github.event.inputs.path }}
