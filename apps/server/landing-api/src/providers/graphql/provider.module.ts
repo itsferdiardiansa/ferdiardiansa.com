@@ -26,18 +26,22 @@ const isDevelopment = process.env.NODE_ENV === 'development'
         formatError: error => {
           const originalError = error.extensions?.originalError as {
             message: string
+            error: string
+            statusCode: number
           }
 
           if (!originalError) {
             return {
               message: error.message,
               code: error.extensions?.code,
+              statusCode: 500,
             }
           }
 
           return {
             message: originalError.message,
-            code: error.extensions?.code,
+            code: originalError.error,
+            statusCode: originalError.statusCode,
           }
         },
       }),

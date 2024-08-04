@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, HttpStatus, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Answer, AnswerDocument } from './schema/answer.models'
 import { Model } from 'mongoose'
-import { GraphQLError } from 'graphql'
 import {
   Question,
   QuestionDocument,
@@ -22,64 +21,42 @@ export class AnswerService {
   }
 
   async create({ question, text }: BaseAnswerInput) {
-    try {
-      const selectedQuestion = await this.questionModel.findById(question)
+    const selectedQuestion = await this.questionModel.findById(question)
 
-      if (!selectedQuestion)
-        throw new Error(`Question with id: ${question} is not found!`)
+    if (!selectedQuestion)
+      throw new NotFoundException(`Question with id: ${question} is not found!`)
 
-      return this.answerModel.create({ question, text })
-    } catch (e) {
-      throw new GraphQLError(e.message, {
-        extensions: {
-          code: 'INTERNAL_SERVER_ERROR',
-        },
-      })
-    }
+    return this.answerModel.create({ question, text })
   }
 
   async update({ id, ...restData }: updateAnswerInput) {
-    try {
-      const selectedQuestion = await this.questionModel.findById(
-        restData.question
+    const selectedQuestion = await this.questionModel.findById(
+      restData.question
+    )
+
+    if (!selectedQuestion)
+      throw new NotFoundException(
+        `Question with id: ${restData.question} is not found!`
       )
 
-      if (!selectedQuestion)
-        throw new Error(`Question with id: ${restData.question} is not found!`)
-
-      return this.answerModel.findByIdAndUpdate(
-        id,
-        {
-          $set: {
-            ...restData,
-            lastUpdated: new Date(),
-          },
+    return this.answerModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          ...restData,
+          lastUpdated: new Date(),
         },
-        { new: true }
-      )
-    } catch (e) {
-      throw new GraphQLError(e.message, {
-        extensions: {
-          code: 'INTERNAL_SERVER_ERROR',
-        },
-      })
-    }
+      },
+      { new: true }
+    )
   }
 
   async delete(id: string): Promise<{ deletedCount: number }> {
-    try {
-      const selectedAnswer = await this.answerModel.findById(id)
+    const selectedAnswer = await this.answerModel.findById(id)
 
-      if (!selectedAnswer)
-        throw new Error(`Answer with id: ${id} is not found!`)
+    if (!selectedAnswer)
+      throw new NotFoundException(`Answer with id: ${id} is not found!`)
 
-      return await this.answerModel.deleteOne({ _id: id })
-    } catch (e) {
-      throw new GraphQLError(e.message, {
-        extensions: {
-          code: 'INTERNAL_SERVER_ERROR',
-        },
-      })
-    }
+    return await this.answerModel.deleteOne({ _id: id })
   }
 }
