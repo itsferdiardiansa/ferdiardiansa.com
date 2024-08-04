@@ -1,7 +1,7 @@
 import { Injectable, HttpStatus, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Answer, AnswerDocument } from './schema/answer.models'
-import { Model } from 'mongoose'
+import { Model, mongo } from 'mongoose'
 import {
   Question,
   QuestionDocument,
@@ -22,11 +22,12 @@ export class AnswerService {
 
   async create({ question, text }: BaseAnswerInput) {
     const selectedQuestion = await this.questionModel.findById(question)
+    const questionObjectId = new mongo.ObjectId(question)
 
     if (!selectedQuestion)
       throw new NotFoundException(`Question with id: ${question} is not found!`)
 
-    return this.answerModel.create({ question, text })
+    return this.answerModel.create({ question: questionObjectId, text })
   }
 
   async update({ id, ...restData }: updateAnswerInput) {
