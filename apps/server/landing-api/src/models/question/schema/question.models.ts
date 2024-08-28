@@ -18,6 +18,7 @@ export class Question {
   lastUpdated: Date
 
   @Field(() => [Answer], { defaultValue: [] })
+  @Prop({ type: Types.ObjectId, ref: 'Answer', default: [] })
   answers: Answer[]
 }
 

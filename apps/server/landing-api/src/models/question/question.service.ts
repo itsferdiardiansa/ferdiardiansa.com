@@ -13,16 +13,17 @@ export class QuestionService {
   ) {}
 
   find() {
-    return this.questionModel.aggregate([
-      {
-        $lookup: {
-          from: 'answers',
-          localField: '_id',
-          foreignField: 'question',
-          as: 'answers',
-        },
-      },
-    ])
+    return this.questionModel.find().populate('answers')
+    // return this.questionModel.aggregate([
+    //   {
+    //     $lookup: {
+    //       from: 'answers',
+    //       localField: '_id',
+    //       foreignField: 'question',
+    //       as: 'answers',
+    //     },
+    //   },
+    // ])
   }
 
   findById(id: string) {
@@ -30,12 +31,14 @@ export class QuestionService {
   }
 
   filter(params: FilterQuestionInput) {
-    return this.questionModel.find({
-      $or: [
-        { _id: params._id },
-        { text: { $regex: '.*' + params.text + '.*', $options: 'i' } },
-      ],
-    })
+    return this.questionModel
+      .find({
+        $or: [
+          { _id: params._id },
+          { text: { $regex: '.*' + params.text + '.*', $options: 'i' } },
+        ],
+      })
+      .populate('answers')
   }
 
   create(data: CreateQuestionInput) {
