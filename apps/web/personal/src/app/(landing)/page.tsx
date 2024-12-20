@@ -8,6 +8,8 @@ import BasicInfo from '@/components/features/basic-info'
 // import Projects from '@/components/features/project'
 // import Blog from '@root/src/components/features/blog'
 
+export const dynamic = 'force-dynamic'
+
 const getCachedContents = cache(
   async () => getContents(),
   [CONTENTS.CACHE_KEY],
@@ -18,6 +20,8 @@ const getCachedContents = cache(
 )
 
 export default async function LandingPage() {
+  await new Promise(resolve => setTimeout(resolve, 6000))
+
   const { data } = await getCachedContents()
 
   return (

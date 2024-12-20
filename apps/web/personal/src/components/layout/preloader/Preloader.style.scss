@@ -1,0 +1,59 @@
+.stairs-loader {
+  position: relative;
+  width: 195px;
+  height: 150px;
+
+  .stair {
+    position: absolute;
+    width: 25px;
+    border-radius: 2px;
+    bottom: 0;
+    transition: height 0.2s ease-in-out;
+  }
+
+  .ball {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    bottom: 0;
+    left: 0;
+    animation: jumpStairs 4s infinite ease-in-out;
+  }
+}
+
+@keyframes jumpStairs {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  10% {
+    transform: translate(15px, -35px) scale(1);
+  }
+  20% {
+    transform: translate(35px, -18px) scale(1, 0.8);
+  }
+  30% {
+    transform: translate(45px, -55px) scale(1);
+  }
+  40% {
+    transform: translate(65px, -38px) scale(1, 0.8);
+  }
+  50% {
+    transform: translate(75px, -75px) scale(1);
+  }
+  60% {
+    transform: translate(95px, -58px) scale(1, 0.8);
+  }
+  70% {
+    transform: translate(105px, -95px) scale(1);
+  }
+  80% {
+    transform: translate(125px, -78px) scale(1, 0.8);
+  }
+  90% {
+    transform: translate(135px, -115px) scale(1);
+  }
+  100% {
+    transform: translate(155px, -98px) scale(1, 0.8);
+  }
+}

@@ -1,8 +1,8 @@
+@use '~@/assets/fonts/acorn/stylesheet.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import '~@/assets/fonts/acorn/stylesheet.scss';
 
 :root {
   --foreground-hex: #e0eeee;
