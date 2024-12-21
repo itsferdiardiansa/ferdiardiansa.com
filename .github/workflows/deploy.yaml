@@ -21,7 +21,11 @@ on:
           - production
 jobs:
   deploy-landing-web:
-    if: inputs.personal_web == true && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main')
+    if: inputs.personal_web == true &&
+        (
+          (inputs.environment == 'staging' && startsWith(github.ref, 'refs/heads/feat/')) ||
+          (inputs.environment == 'production' && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'))
+        )
     uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
       artifact_name: personal-web-artifact
@@ -32,7 +36,11 @@ jobs:
       token: ${{ secrets.VERCEL_TOKEN }}
 
   deploy-landing-api:
-    if: inputs.landing_api == true && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main')
+    if: inputs.landing_api == true &&
+        (
+          (inputs.environment == 'staging' && startsWith(github.ref, 'refs/heads/feat/')) ||
+          (inputs.environment == 'production' && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'))
+        )
     uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
       artifact_name: landing-api-artifact
