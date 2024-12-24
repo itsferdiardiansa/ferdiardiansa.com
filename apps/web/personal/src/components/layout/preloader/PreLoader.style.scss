@@ -8,6 +8,7 @@
     width: 25px;
     border-radius: 2px;
     bottom: 0;
+    will-change: transform;
     transition: height 0.2s ease-in-out;
   }
 
@@ -18,8 +19,19 @@
     border-radius: 50%;
     bottom: 0;
     left: 0;
+    overflow: hidden;
+    will-change: transform;
     animation: jumpStairs 4s infinite ease-in-out;
   }
+}
+
+.particle {
+  width: 5px;
+  height: 5px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0; /* Ini akan diubah oleh GSAP */
 }
 
 .message-container {

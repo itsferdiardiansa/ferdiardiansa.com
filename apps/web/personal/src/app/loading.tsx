@@ -1,5 +1,6 @@
-import Preloader from '@/components/layout/preloader'
+'use client'
+import PreLoader from '@/components/layout/preloader'
 
 export default function RootLoader() {
-  return <Preloader />
+  return <PreLoader />
 }

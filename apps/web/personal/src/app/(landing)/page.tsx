@@ -20,7 +20,7 @@ const getCachedContents = cache(
 )
 
 export default async function LandingPage() {
-  await new Promise(resolve => setTimeout(resolve, 8000))
+  await new Promise(resolve => setTimeout(resolve, 6000))
 
   const { data } = await getCachedContents()
 
