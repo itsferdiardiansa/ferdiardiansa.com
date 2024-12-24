@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import { gsap } from 'gsap'
 import { upPositions, downPositions } from './positions'
 import { createParticleEffect } from '@/utils'
@@ -8,6 +8,7 @@ import messages from '@/constants/greetings'
 import './PreLoader.style.scss'
 
 type StairRef = HTMLDivElement | null
+type GSAPTimeline = gsap.core.Timeline
 
 export default function PreLoader() {
   const [currentMessage, setCurrentMessage] = useState<string>(
@@ -19,8 +20,9 @@ export default function PreLoader() {
   const ballRef = useRef<HTMLDivElement>(null)
   const stairsRef = useRef<StairRef[]>([])
   const messageDelay = useRef<number>(1)
+  const timeline = useRef<GSAPTimeline | null>(null)
 
-  const animateUp = (timeline: gsap.core.Timeline) => {
+  const animateUp = (timeline: GSAPTimeline) => {
     upPositions.forEach(
       (pos: { x: number; y: number; scale?: number }, i: number) => {
         timeline.to(ballRef.current, {
@@ -56,7 +58,7 @@ export default function PreLoader() {
     )
   }
 
-  const animateDown = (timeline: gsap.core.Timeline) => {
+  const animateDown = (timeline: GSAPTimeline) => {
     downPositions.forEach(
       (pos: { x: number; y: number; duration?: number }, i: number) => {
         timeline.to(ballRef.current, {
@@ -65,17 +67,27 @@ export default function PreLoader() {
           duration: pos.duration,
           ease: 'power1.in',
           rotation: `+=${360 / downPositions.length}`,
+          onComplete: () => {
+            if (i === downPositions.length - 1) {
+              console.log('NEED RESTART: ', i)
+              timeline.restart()
+            }
+          },
         })
       }
     )
   }
 
-  useEffect(() => {
-    const timeline = gsap.timeline()
-    animateUp(timeline)
-    timeline.eventCallback('onComplete', () => animateDown(timeline))
+  useLayoutEffect(() => {
+    timeline.current = gsap.timeline({
+      id: `gsap-${Date.now()}`,
+    }) as GSAPTimeline
+    animateUp(timeline.current)
+    timeline.current.eventCallback('onComplete', () =>
+      animateDown(timeline.current as GSAPTimeline)
+    )
     return () => {
-      timeline.kill()
+      ;(timeline.current as GSAPTimeline).kill()
     }
   }, [])
 
@@ -121,7 +133,7 @@ export default function PreLoader() {
   return (
     <div className="min-h-screen min-w-full bg-[#121315] flex flex-col justify-center items-center">
       <div className="loader-container flex flex-col items-center justify-center">
-        <div className="spinner-wrapper mb-4">
+        <div className="spinner-wrapper absolute top-0 left-0">
           {[...Array(2)].map((_, index) => (
             <div key={index} className="opacity-0">
               <svg
@@ -160,6 +172,7 @@ export default function PreLoader() {
           ></div>
         </div>
       </div>
+
       <div className="message-container relative h-16 w-full overflow-hidden">
         {previousMessage && messageReady && (
           <p className="message old-message absolute w-full text-center text-[#e0eeee] text-base md:text-lg px-4">

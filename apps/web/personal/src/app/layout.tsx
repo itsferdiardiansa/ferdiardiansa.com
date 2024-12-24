@@ -10,7 +10,7 @@ import LenisProviders from '@/contexts/lenis/lenis.provider'
 import './globals.scss'
 
 export const dynamic = 'force-dynamic'
-export const revalidate = 2629800 // a month
+// export const revalidate = 2629800 // a month
 
 const getBaseMetadataCached = cache(
   async () => getBaseMetadata(),
