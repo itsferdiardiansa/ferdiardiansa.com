@@ -69,7 +69,6 @@ export default function PreLoader() {
           rotation: `+=${360 / downPositions.length}`,
           onComplete: () => {
             if (i === downPositions.length - 1) {
-              console.log('NEED RESTART: ', i)
               timeline.restart()
             }
           },
@@ -82,6 +81,7 @@ export default function PreLoader() {
     timeline.current = gsap.timeline({
       id: `gsap-${Date.now()}`,
     }) as GSAPTimeline
+
     animateUp(timeline.current)
     timeline.current.eventCallback('onComplete', () =>
       animateDown(timeline.current as GSAPTimeline)
@@ -131,14 +131,14 @@ export default function PreLoader() {
   }
 
   return (
-    <div className="min-h-screen min-w-full bg-[#121315] flex flex-col justify-center items-center">
+    <div className="w-screen h-screen bg-[#121315] flex flex-col justify-center items-center">
       <div className="loader-container flex flex-col items-center justify-center">
         <div className="spinner-wrapper absolute top-0 left-0">
           {[...Array(2)].map((_, index) => (
             <div key={index} className="opacity-0">
               <svg
                 aria-hidden="true"
-                className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                className="fake-spinner w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +156,7 @@ export default function PreLoader() {
             </div>
           ))}
         </div>
-        <div className="stairs-loader relative mb-4">
+        <div role="presentation" className="stairs-loader relative mb-4">
           {[1, 2, 3, 4, 5].map(index => (
             <div
               key={index}
@@ -165,11 +165,7 @@ export default function PreLoader() {
               style={{ left: `${index * 30}px`, height: `${index * 20}px` }}
             ></div>
           ))}
-          <div
-            ref={ballRef}
-            className="ball bg-teal-500 relative"
-            onClick={() => createParticleEffect(ballRef.current)}
-          ></div>
+          <div ref={ballRef} className="ball bg-teal-500 relative"></div>
         </div>
       </div>
 
