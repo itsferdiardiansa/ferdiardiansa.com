@@ -20,6 +20,8 @@ const getCachedContents = cache(
 )
 
 export default async function LandingPage() {
+  throw new Error('Server error for testing')
+
   await new Promise(resolve => setTimeout(resolve, 6000))
 
   const { data } = await getCachedContents()
