@@ -2,11 +2,6 @@
   "private": true,
   "name": "@oxcyn/ts-config",
   "version": "1.0.0",
-  "author": {
-    "email": "ferdiardiansa@gmail.com",
-    "name": "Ferdi Ardiansa",
-    "url": "https://github.com/itsferdiardiansa"
-  },
   "files": [
     "./base.json",
     "./next.json"

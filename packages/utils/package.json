@@ -25,11 +25,6 @@
   "files": [
     "dist"
   ],
-  "author": {
-    "email": "ferdiardiansa@gmail.com",
-    "name": "Ferdi Ardiansa",
-    "url": "https://github.com/itsferdiardiansa"
-  },
   "license": "ISC",
   "dependencies": {
     "@oxcyn/ts-config": "workspace:^",
