@@ -16,5 +16,10 @@ declare module '@oxcyn/next' {
       params: P
       searchParams: SP
     }
+
+    export type NextParamAsyncProps<P = {}, SP = {}> = {
+      params: Promise<P>
+      searchParams?: Promise<SP> | undefined
+    }
   }
 }
