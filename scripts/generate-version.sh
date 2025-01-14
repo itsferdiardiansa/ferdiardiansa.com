@@ -52,12 +52,14 @@ createPullRequest() {
 
   git checkout -b release/${tagVersion}
 
-  updateVersion  
+  updateVersion
   createPullRequestTemplate
 
+  git status
+  git log --oneline -5
   git push origin release/${tagVersion} -f
 
-  pullRequestUrl=$(gh pr create -B main -t "release: ${tagVersion}" --body-file ./PULL_REQUEST_TEMPLATE.md)
+  pullRequestUrl=$(gh pr create -B main -t "release: ${tagVersion}" --head release/${tagVersion} --body-file ./PULL_REQUEST_TEMPLATE.md)
 }
 
 genereteVersion() {
