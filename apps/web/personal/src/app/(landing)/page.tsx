@@ -5,7 +5,7 @@ import { CONTENTS } from '@/constants/cache/contents'
 import About from '@/components/features/about'
 import CareerTimeline from '@/components/features/career-timeline'
 import BasicInfo from '@/components/features/basic-info'
-// import Projects from '@/components/features/project'
+import Projects from '@/components/features/project'
 // import Blog from '@root/src/components/features/blog'
 
 export const dynamic = 'force-dynamic'
@@ -32,7 +32,7 @@ export default async function LandingPage() {
         <About about={data.about} />
 
         <CareerTimeline career={data.career} />
-        {/* <Projects /> */}
+        <Projects />
         {/* <Blog /> */}
       </div>
     </>

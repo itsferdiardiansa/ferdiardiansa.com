@@ -1,0 +1,56 @@
+.link {
+  @apply block py-4 flex flex-row gap-4 items-center hover:text-gray-200;
+
+  .content {
+    @apply flex-1;
+    min-width: 0;
+
+    .categoryAuthor {
+      @apply text-sm text-gray-500;
+    }
+
+    .title {
+      @apply font-bold overflow-hidden text-ellipsis whitespace-nowrap flex-1;
+
+      &.small {
+        @apply text-sm;
+      }
+
+      &.medium {
+        @apply text-base;
+      }
+
+      &.large {
+        @apply text-lg;
+      }
+    }
+
+    .description {
+      @apply text-gray-400 pt-2 overflow-hidden text-ellipsis whitespace-nowrap text-sm;
+    }
+
+    .additionalInfo {
+      @apply flex justify-between items-center mt-4 text-gray-500 text-xs;
+
+      &-wrapper {
+        @apply flex items-center space-x-4;
+
+        .date {
+          @apply text-gray-500;
+        }
+
+        .stat {
+          @apply flex items-center space-x-1;
+        }
+      }
+    }
+  }
+
+  .thumbnail {
+    @apply w-32 h-24 lg:h-32 rounded-md lg:ml-6 overflow-hidden;
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+}

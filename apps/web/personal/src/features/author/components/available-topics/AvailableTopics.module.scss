@@ -1,0 +1,15 @@
+.container {
+  @apply space-y-4;
+
+  .header {
+    @apply text-xl font-bold text-teal-400 mb-4;
+  }
+
+  .topics {
+    @apply flex flex-wrap gap-2;
+
+    .topic {
+      @apply px-3 py-1 rounded-full bg-slate-800 text-sm text-gray-300;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.skeletonImage {
+  @apply relative overflow-hidden;
+  background-color: var(--skeleton-bg);
+
+  &.rounded {
+    @apply rounded-lg;
+  }
+
+  &.circle {
+    @apply rounded-full;
+  }
+
+  .imageSvg {
+    @apply w-full h-full block fill-gray-500;
+  }
+}

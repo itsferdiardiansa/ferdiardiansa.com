@@ -1,0 +1,36 @@
+.container {
+  @apply m-[-1rem] lg:m-[unset] block lg:rounded-lg overflow-hidden;
+
+  .wrapper {
+    @apply relative;
+
+    &::after {
+      @apply w-full h-36 absolute bottom-0 left-0 block bg-gradient-to-t from-black to-transparent;
+      content: '';
+    }
+
+    .image {
+      @apply w-full h-64 lg:h-96 object-cover;
+    }
+
+    .content {
+      @apply absolute bottom-0 left-0 w-full p-3 lg:p-6 text-white z-50;
+
+      .title {
+        @apply text-xl lg:text-2xl font-bold mb-1 lg:mb-2;
+      }
+
+      .description {
+        @apply text-sm text-gray-300;
+      }
+
+      .meta {
+        @apply mt-4 text-xs text-gray-400 flex items-center space-x-2;
+
+        .category {
+          @apply bg-teal-500 text-white py-1 px-2 rounded;
+        }
+      }
+    }
+  }
+}

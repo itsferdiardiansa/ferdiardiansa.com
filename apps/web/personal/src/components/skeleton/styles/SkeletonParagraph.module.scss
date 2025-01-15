@@ -1,0 +1,8 @@
+.paragraph {
+  @apply space-y-2;
+
+  .line {
+    @apply h-3 rounded-sm;
+    background-color: var(--skeleton-bg);
+  }
+}

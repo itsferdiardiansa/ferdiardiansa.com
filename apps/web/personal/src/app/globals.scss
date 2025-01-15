@@ -4,17 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global Variables */
 :root {
+  /* Foreground Colors */
   --foreground-hex: #e0eeee;
   --foreground-rgb: rgb(0, 0, 0);
+
+  /* Skeleton Background Colors */
+  --skeleton-bg-light: #d1d5db; /* Light Mode */
+  --skeleton-bg-dark: #4b5563; /* Dark Mode */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: rgb(255, 255, 255);
-  }
+/* Theme Colors */
+[data-theme='light'] {
+  --skeleton-bg: var(--skeleton-bg-light);
 }
 
+[data-theme='dark'] {
+  --skeleton-bg: var(--skeleton-bg-dark);
+}
+
+/* Body Styling */
 body {
   color: var(--foreground-hex);
   font-family: 'Acorn', sans-serif;

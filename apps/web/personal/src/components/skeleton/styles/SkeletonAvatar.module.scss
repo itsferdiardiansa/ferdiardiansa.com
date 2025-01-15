@@ -1,0 +1,11 @@
+.avatar {
+  background-color: var(--skeleton-bg);
+
+  &.circle {
+    @apply rounded-full;
+  }
+
+  &.square {
+    @apply rounded-none;
+  }
+}

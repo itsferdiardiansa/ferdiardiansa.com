@@ -1,0 +1,16 @@
+.button {
+  @apply h-10;
+  background-color: var(--skeleton-bg);
+
+  &.circle {
+    @apply rounded-full;
+  }
+
+  &.round {
+    @apply rounded-lg;
+  }
+
+  &.square {
+    @apply rounded-none;
+  }
+}

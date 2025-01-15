@@ -32,7 +32,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <LenisProviders>
-        <body className="bg-[#121315]">
+        <body className="bg-[#121315]" data-theme="dark">
           <TanstackQueryProviders>{children}</TanstackQueryProviders>
         </body>
       </LenisProviders>
