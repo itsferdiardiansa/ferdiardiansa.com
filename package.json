@@ -6,6 +6,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
     "reset": "npx nx reset",
+    "type-check": "pnpm nx run-many -t type-check",
     "format": "pnpm nx run-many -t format",
     "format:write": "pnpm nx run-many -t format:write",
     "lint": "pnpm nx run-many -t lint",
