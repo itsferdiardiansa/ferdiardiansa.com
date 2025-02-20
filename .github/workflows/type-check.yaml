@@ -1,0 +1,28 @@
+name: Type Check
+on:
+  push:
+    branches-ignore:
+      - main
+      - staging
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - uses: ./.github/actions/setup
+
+      - name: Install dependencies
+        run: pnpm i --no-frozen-lockfile
+      
+      - name: Run type checking
+        run: pnpm run type-check | tee type-check-stats.log
+      
+      - name: Upload type check stats log
+        uses: actions/upload-artifact@v4
+        with:
+          name: type-check-stats
+          path: type-check-stats.log
+          retention-days: 7
