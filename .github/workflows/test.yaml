@@ -25,7 +25,7 @@ jobs:
   
   notify:
     runs-on: ubuntu-latest
-    name: Send a notification
+    needs: test
     if: always()
     steps:
       - uses: actions/checkout@v4
@@ -36,10 +36,9 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_CI_TEST }}
           SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
           SLACK_MESSAGE: |
-            🧪 *Test Run Completed*
-              - *Repository:* ${{ github.repository }}
               - *Branch:* ${{ github.ref_name }}
               - *Status:* `${{ job.status == 'success' && 'passed ✅' || 'failed ❌' }}`
               - *Commit:* `${{ github.event.head_commit.message }}`
               - *By:* `${{ github.actor }}`
+
               - [🔗 View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
