@@ -78,7 +78,7 @@ jobs:
             echo "color=good" >> $GITHUB_ENV
           else
             echo "color=danger" >> $GITHUB_ENV
-
+          fi
       - name: Send notification
         uses: rtCamp/action-slack-notify@v2
         env:
