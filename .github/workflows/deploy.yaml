@@ -53,3 +53,26 @@ jobs:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
       token: ${{ secrets.VERCEL_TOKEN }}
+
+  notify:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [deploy-landing-web, deploy-landing-api]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Send notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_CI_DEPLOYMENT }}
+          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+          SLACK_MESSAGE: |
+            - *Branch:* ${{ github.ref_name }}
+            - *Status:* `${{ job.status == 'success' && 'passed ✅' || 'failed ❌' }}`
+            - *Env:* `${{ inputs.environment }}`
+            - *By:* `${{ github.actor }}`
+
+            - 🖥️ *Landing Web:* `${{ needs.deploy-landing-web.outputs.deployment_url || 'N/A' }}`
+            - 📡 *Landing API:* `${{ needs.deploy-landing-api.outputs.deployment_url || 'N/A' }}`
+
+            - [🔗 View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
