@@ -15,23 +15,7 @@ jobs:
   push-coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: ./.github/workflows/wc-push-coverage.yaml
         with:
-          fetch-depth: 0
-
-      - name: Download coverage reports artifact
-        uses: dawidd6/action-download-artifact@v3
-        with:
-          name: ${{ vars.COVERAGE_NAME }}
-          path: ${{ vars.COVERAGE_PATH }}
           workflow: test-coverage.yaml
-          run_id: ${{ github.event.workflow_run.id }}
-          search_artifacts: true
-
-      - name: Push coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        env:
-          slug: itsferdiardiansa/ferdiardiansa.com
-        with:
-          files: ${{ vars.COVERAGE_FILE_JSON }}
-          token: ${{ secrets.CODECOV_TOKEN }}
+          workflow_run_id: ${{ github.event.workflow_run.id }}
