@@ -73,12 +73,14 @@ jobs:
 
       - name: Set Slack Color
         id: slack_status
+        shell: bash
         run: |
           if [[ "${{ needs.deploy-landing-web.result }}" == "success" ]] || [[ "${{ needs.deploy-landing-api.result }}" == "success" ]]; then
-            echo "color=good" >> $GITHUB_ENV
+            echo color=good >> $GITHUB_OUTPUT
           else
-            echo "color=danger" >> $GITHUB_ENV
+            echo color=danger >> $GITHUB_OUTPUT
           fi
+
       - name: Send notification
         uses: rtCamp/action-slack-notify@v2
         env:

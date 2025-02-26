@@ -54,6 +54,7 @@ jobs:
 
       - name: Deploy
         id: vercel-deploy
+        shell: bash
         run: |
           DEPLOY_URL=$(vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }} -d)
-          echo "vercel_url=$DEPLOY_URL >> $GITHUB_OUTPUT"
+          echo vercel_url=$DEPLOY_URL >> $GITHUB_OUTPUT
