@@ -71,14 +71,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set Slack Color
+        id: slack_status
+        run: |
+          if [[ "${{ needs.deploy-landing-web.result }}" == "success" ]] || [[ "${{ needs.deploy-landing-api.result }}" == "success" ]]; then
+            echo "color=good" >> $GITHUB_ENV
+          else
+            echo "color=danger" >> $GITHUB_ENV
+
       - name: Send notification
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_CI_DEPLOYMENT }}
-          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+          SLACK_COLOR: ${{ steps.slack_status.outputs.color }}
           SLACK_MESSAGE: |
             - *Branch:* ${{ github.ref_name }}
-            - *Status:* `${{ job.status == 'success' && 'passed ✅' || 'failed ❌' }}`
+            - *Status:* `${{ steps.slack_status.outputs.color == 'good' && 'passed ✅' || 'failed ❌' }}`
             - *Env:* `${{ inputs.environment }}`
             - *By:* `${{ github.actor }}`
 
