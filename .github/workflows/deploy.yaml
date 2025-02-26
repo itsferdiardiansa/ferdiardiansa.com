@@ -23,7 +23,13 @@ jobs:
   deploy-landing-web:
     if: inputs.personal_web == true &&
       (
-        (inputs.environment == 'production' && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'))
+        (inputs.environment == 'staging') ||
+        (inputs.environment == 'production' && 
+          (
+            startsWith(github.ref, 'refs/heads/release/') || 
+            startsWith(github.ref, 'refs/heads/main/') 
+          )
+        )
       )
     uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
@@ -37,7 +43,13 @@ jobs:
   deploy-landing-api:
     if: inputs.landing_api == true &&
       (
-        (inputs.environment == 'production' && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'))
+        (inputs.environment == 'staging') ||
+        (inputs.environment == 'production' && 
+          (
+            startsWith(github.ref, 'refs/heads/release/') || 
+            startsWith(github.ref, 'refs/heads/main/') 
+          )
+        )
       )
     uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
