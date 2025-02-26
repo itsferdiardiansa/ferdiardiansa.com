@@ -12,7 +12,7 @@ on:
       - "**.json"
       - "docs/**"
 jobs:
-  upload-coverage:
+  push-coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -28,10 +28,10 @@ jobs:
           run_id: ${{ github.event.workflow_run.id }}
           search_artifacts: true
 
-      - name: Upload coverage reports to Codecov
+      - name: Push coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         env:
-          slug: itsferdiardiansa/Oxcyn
+          slug: itsferdiardiansa/ferdiardiansa.com
         with:
           files: ${{ vars.COVERAGE_FILE_JSON }}
           token: ${{ secrets.CODECOV_TOKEN }}
