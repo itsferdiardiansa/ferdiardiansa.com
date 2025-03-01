@@ -22,10 +22,15 @@ on:
 jobs:
   deploy-landing-web:
     if: inputs.personal_web == true &&
-        (
-          (inputs.environment == 'staging' && startsWith(github.ref, 'refs/heads/feat/')) ||
-          (inputs.environment == 'production' && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'))
+      (
+        (inputs.environment == 'staging') ||
+        (inputs.environment == 'production' && 
+          (
+            startsWith(github.ref, 'refs/heads/release/') || 
+            startsWith(github.ref, 'refs/heads/main/') 
+          )
         )
+      )
     uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
       artifact_name: personal-web-artifact
@@ -37,10 +42,15 @@ jobs:
 
   deploy-landing-api:
     if: inputs.landing_api == true &&
-        (
-          (inputs.environment == 'staging' && startsWith(github.ref, 'refs/heads/feat/')) ||
-          (inputs.environment == 'production' && (startsWith(github.ref, 'refs/heads/release/') || github.ref == 'refs/heads/main'))
+      (
+        (inputs.environment == 'staging') ||
+        (inputs.environment == 'production' && 
+          (
+            startsWith(github.ref, 'refs/heads/release/') || 
+            startsWith(github.ref, 'refs/heads/main/') 
+          )
         )
+      )
     uses: ./.github/workflows/wc-deploy-schema.yaml
     with:
       artifact_name: landing-api-artifact
@@ -53,3 +63,36 @@ jobs:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_API_LANDING_ID }}
       token: ${{ secrets.VERCEL_TOKEN }}
+
+  notify:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [deploy-landing-web, deploy-landing-api]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Slack Color
+        id: slack_status
+        shell: bash
+        run: |
+          if [[ "${{ needs.deploy-landing-web.result }}" == "success" ]] || [[ "${{ needs.deploy-landing-api.result }}" == "success" ]]; then
+            echo color=good >> $GITHUB_OUTPUT
+          else
+            echo color=danger >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_CI_DEPLOYMENT }}
+          SLACK_COLOR: ${{ steps.slack_status.outputs.color }}
+          SLACK_MESSAGE: |
+            - *Branch:* ${{ github.ref_name }}
+            - *Status:* `${{ steps.slack_status.outputs.color == 'good' && 'passed ✅' || 'failed ❌' }}`
+            - *Env:* `${{ inputs.environment }}`
+            - *By:* `${{ github.actor }}`
+
+            - 🖥️ *Landing Web:* `${{ needs.deploy-landing-web.outputs.deployment_url || 'N/A' }}`
+            - 📡 *Landing API:* `${{ needs.deploy-landing-api.outputs.deployment_url || 'N/A' }}`
+
+            - [🔗 View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})

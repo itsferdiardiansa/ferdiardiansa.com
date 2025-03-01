@@ -20,12 +20,18 @@ on:
         required: true
       token:
         required: true
+    outputs:
+      deployment_url:
+        description: "Url of deployed Vercel project"
+        value: ${{ jobs.deploy.outputs.vercel_url }}
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.org_id }}
       VERCEL_PROJECT_ID: ${{ secrets.project_id }}
+    outputs:
+      vercel_url: ${{ steps.vercel-deploy.outputs.vercel_url }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -47,4 +53,8 @@ jobs:
         run: vercel build ${{ inputs.environment == 'production' && '--prod' || '' }} --token=${{ secrets.token }} -d
 
       - name: Deploy
-        run: vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }} -d
+        id: vercel-deploy
+        shell: bash
+        run: |
+          DEPLOY_URL=$(vercel deploy --token=${{ secrets.token }} ${{ inputs.environment == 'production' && '--prod' || '' }} -d)
+          echo vercel_url=$DEPLOY_URL >> $GITHUB_OUTPUT

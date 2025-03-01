@@ -21,6 +21,8 @@ jobs:
   release:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    outputs:
+      tag_version: ${{ steps.release_tag.outputs.tag_version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,4 +41,28 @@ jobs:
       - run: git config user.name "github-actions[bot]"
       - run: git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - run: . ./scripts/release-tag.sh --workspace=${{ github.event.inputs.workspace }} --path=${{ github.event.inputs.path }}
+      - id: release_tag
+        shell: bash 
+        run: . ./scripts/release-tag.sh --workspace=${{ github.event.inputs.workspace }} --path=${{ github.event.inputs.path }}
+  
+  notify:
+    runs-on: ubuntu-latest
+    needs: release
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Send notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_CI_RELEASE }}
+          SLACK_MESSAGE: |
+            🚀 *New Release Created!*
+            - *Version:* `${{ needs.release.outputs.tag_version }}`
+            - *Status:* `${{ needs.release.result == 'success' && 'Success ✅' || 'Failed ❌' }}`
+            - *By:* `${{ github.actor }}`
+            
+            - [🔗 View Release](${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ needs.release.outputs.tag_version }})
+            - [🔗 View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
