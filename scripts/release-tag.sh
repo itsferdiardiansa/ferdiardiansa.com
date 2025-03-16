@@ -54,6 +54,8 @@ setLatestRelaeseVariables() {
   fi
 
   tagVersion="${workspaceName}-${latestVersion}"
+
+  echo "tag_version=${tagVersion}" >> "$GITHUB_OUTPUT"
 }
 
 populateArguments() {

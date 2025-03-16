@@ -21,7 +21,6 @@
     "test:config": "jest --showConfig",
     "type-check": "tsc --noEmit --diagnostics"
   },
-  "packageManager": "pnpm@7.3.0",
   "dependencies": {
     "@apollo/server": "^4.10.4",
     "@graphql-tools/utils": "^10.2.2",

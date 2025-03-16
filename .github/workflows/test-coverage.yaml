@@ -8,7 +8,7 @@ on:
       - auto_merge_disabled
       - synchronize
     branches:
-      - 'release/**'
+      - release/**
       - main
 jobs:
   test-coverage:
@@ -36,3 +36,33 @@ jobs:
         with:
           name: ${{ vars.COVERAGE_NAME }}
           path: ${{ vars.COVERAGE_PATH }}
+
+  push-coverage:
+    runs-on: ubuntu-latest
+    if: success()
+    needs: test-coverage
+    steps:
+      - uses: ./.github/workflows/wc-push-coverage.yaml
+        with:
+          workflow: ${{ github.workflow }}
+          workflow_run_id: ${{ github.run_id }}
+
+  notify:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: push-coverage
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Send notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_CI_TEST_COVERAGE }}
+          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+          SLACK_MESSAGE: |
+            - *Branch:* ${{ github.ref_name }}
+            - *Status:* `${{ job.status == 'success' && 'passed ✅' || 'failed ❌' }}`
+            - *Commit:* `${{ github.event.pull_request.commits }}`
+            - *By:* `${{ github.actor }}`
+
+            - [🔗 View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
