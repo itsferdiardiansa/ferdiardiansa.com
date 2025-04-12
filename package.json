@@ -35,9 +35,6 @@
     "nyc": "^15.1.0",
     "prettier": "^3.3.2"
   },
-  "pnpm": {
-    "default": "7.3.0"
-  },
   "lint-staged": {
     "**/*.{js,ts,tsx}": [
       "pnpm run format:write",
