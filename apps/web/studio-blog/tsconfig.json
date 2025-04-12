@@ -5,12 +5,16 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "module": "Preserve",
     "moduleDetection": "force",
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
