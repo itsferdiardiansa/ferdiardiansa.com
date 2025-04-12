@@ -50,7 +50,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     if: always()
-    needs: push-coverage
+    needs: [push-coverage, test-coverage]
     steps:
       - uses: actions/checkout@v4
 
@@ -58,10 +58,10 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_CI_TEST_COVERAGE }}
-          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+          SLACK_COLOR: ${{ (needs.push-coverage.result && needs.test-coverage.result) == 'success' && 'good' || 'danger' }}
           SLACK_MESSAGE: |
             - *Branch:* ${{ github.ref_name }}
-            - *Status:* `${{ job.status == 'success' && 'passed ✅' || 'failed ❌' }}`
+            - *Status:* `${{ (needs.push-coverage.result && needs.test-coverage.result) == 'success' && 'passed ✅' || 'failed ❌' }}`
             - *Commit:* `${{ github.event.pull_request.commits }}`
             - *By:* `${{ github.actor }}`
 

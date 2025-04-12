@@ -34,10 +34,10 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_CI_TEST }}
-          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+          SLACK_COLOR: ${{ needs.test.result == 'success' && 'good' || 'danger' }}
           SLACK_MESSAGE: |
               - *Branch:* ${{ github.ref_name }}
-              - *Status:* `${{ job.status == 'success' && 'passed ✅' || 'failed ❌' }}`
+              - *Status:* `${{ needs.test.result == 'success' && 'passed ✅' || 'failed ❌' }}`
               - *Commit:* `${{ github.event.head_commit.message }}`
               - *By:* `${{ github.actor }}`
 
