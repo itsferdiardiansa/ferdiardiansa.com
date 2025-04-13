@@ -64,10 +64,10 @@ jobs:
           echo "SANITY_STUDIO_API_VERSION=$version" >> $GITHUB_ENV
 
       - name: Build
-        run: pnpm build
+        run: pnpm run build
       
       - name: Deploy
-        run: pnpm deploy
+        run: pnpm run deploy
   
   deploy-landing-api:
     if: inputs.landing_api == true &&
