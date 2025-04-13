@@ -1,13 +1,13 @@
-import type {SchemaTypeDefinition} from 'sanity'
+import type { SchemaTypeDefinition } from 'sanity'
 
-import {blockContentType} from './blockContentType'
-import {metaType} from './metaType'
+import { blockContentType } from './blockContentType'
+import { metaType } from './metaType'
 
-import {categoryType} from './categoryType'
-import {postType} from './postType'
-import {authorType} from './authorType'
+import { categoryType } from './categoryType'
+import { postType } from './postType'
+import { authorType } from './authorType'
 
-export const schemaTypes: {types: SchemaTypeDefinition[]} = {
+export const schemaTypes: { types: SchemaTypeDefinition[] } = {
   types: [
     // Share Types
     blockContentType,

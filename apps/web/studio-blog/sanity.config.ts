@@ -1,9 +1,9 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {dateRangePlugin} from 'sanity-plugin-daterange-input'
-import {schemaTypes} from './schemaTypes'
-import {createImprovedAction} from './actions/PublishDocumentAction'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { dateRangePlugin } from 'sanity-plugin-daterange-input'
+import { schemaTypes } from './schemaTypes'
+import { createImprovedAction } from './actions/PublishDocumentAction'
 
 export default defineConfig({
   name: 'default',
@@ -15,8 +15,8 @@ export default defineConfig({
   plugins: [structureTool(), visionTool(), dateRangePlugin()],
 
   document: {
-    actions: (prev) => {
-      return prev.map((originalAction) => {
+    actions: prev => {
+      return prev.map(originalAction => {
         return originalAction.action === 'publish'
           ? createImprovedAction(originalAction)
           : originalAction

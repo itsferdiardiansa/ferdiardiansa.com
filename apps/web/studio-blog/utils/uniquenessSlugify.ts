@@ -1,5 +1,5 @@
 import slugify from 'slugify'
-import type {SlugSourceContext} from 'sanity'
+import type { SlugSourceContext } from 'sanity'
 
 interface SlugifyOptions {
   type: string
@@ -10,7 +10,7 @@ interface SlugifyOptions {
 export async function slugifyWithUniqueness(
   input: string,
   context: SlugSourceContext,
-  options: SlugifyOptions,
+  options: SlugifyOptions
 ): Promise<string> {
   const baseSlug = slugify(input, {
     lower: true,
@@ -21,11 +21,13 @@ export async function slugifyWithUniqueness(
   const field = options.field || 'slug'
   const fieldPath = options.fieldPath || `${field}.current`
 
-  const {getClient} = context
-  const client = getClient({apiVersion: process.env.SANITY_STUDIO_API_VERSION!})
+  const { getClient } = context
+  const client = getClient({
+    apiVersion: process.env.SANITY_STUDIO_API_VERSION!,
+  })
 
   const query = `count(*[_type == $type && ${fieldPath} == $slug]{_id})`
-  const params = {slug: baseSlug, type}
+  const params = { slug: baseSlug, type }
 
   const count = await client.fetch(query, params)
 

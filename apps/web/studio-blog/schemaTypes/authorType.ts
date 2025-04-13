@@ -1,6 +1,6 @@
-import {UserIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
-import {slugifyWithUniqueness} from '@/utils/uniquenessSlugify'
+import { UserIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
+import { slugifyWithUniqueness } from '@/utils/uniquenessSlugify'
 
 export const authorType = defineType({
   name: 'author',
@@ -12,10 +12,10 @@ export const authorType = defineType({
       name: 'name',
       type: 'string',
       description: 'Use letters, numbers and spaces.',
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.required()
           .min(5)
-          .custom((value) => {
+          .custom(value => {
             const trimmed = value?.trim() || ''
             const isValid = /^[a-zA-Z0-9\s]+$/.test(trimmed)
 
@@ -32,17 +32,17 @@ export const authorType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      readOnly: ({document}) => Boolean(document?.isPublished),
+      readOnly: ({ document }) => Boolean(document?.isPublished),
       description: 'Slug cannot be changed when the author is published.',
       options: {
         source: 'name',
         slugify: (input, _, context) => {
-          return slugifyWithUniqueness(input, context, {type: 'author'})
+          return slugifyWithUniqueness(input, context, { type: 'author' })
         },
       },
-      validation: (Rule) => {
+      validation: Rule => {
         return Rule.required().custom((slug, context) => {
-          const {document} = context
+          const { document } = context
           const name = String(document?.name || '')
 
           if (document?.isPublished) return true
@@ -74,7 +74,7 @@ export const authorType = defineType({
       of: [
         defineArrayMember({
           type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
         }),
       ],

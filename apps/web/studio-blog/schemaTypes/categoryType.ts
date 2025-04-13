@@ -1,6 +1,6 @@
-import {slugifyWithUniqueness} from '@/utils/uniquenessSlugify'
-import {TagIcon} from '@sanity/icons'
-import {defineField, defineType} from 'sanity'
+import { slugifyWithUniqueness } from '@/utils/uniquenessSlugify'
+import { TagIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export const categoryType = defineType({
   name: 'category',
@@ -12,8 +12,8 @@ export const categoryType = defineType({
       name: 'title',
       type: 'string',
       description: 'Title must be letters and spaces only.',
-      validation: (Rule) =>
-        Rule.required().custom((value) => {
+      validation: Rule =>
+        Rule.required().custom(value => {
           const trimmed = value?.trim() || ''
           const isValid = /^[a-zA-Z/\s]+$/.test(trimmed)
 
@@ -30,12 +30,12 @@ export const categoryType = defineType({
       options: {
         source: 'title',
         slugify: (input, _, context) => {
-          return slugifyWithUniqueness(input, context, {type: 'category'})
+          return slugifyWithUniqueness(input, context, { type: 'category' })
         },
       },
-      validation: (Rule) => {
+      validation: Rule => {
         return Rule.required().custom((slug, context) => {
-          const {document} = context
+          const { document } = context
           const title = String(document?.title || '')
 
           if (document?.isPublished) return true

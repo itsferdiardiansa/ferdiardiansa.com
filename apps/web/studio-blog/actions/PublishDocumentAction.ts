@@ -1,10 +1,12 @@
-import {DocumentActionComponent, useDocumentOperation} from 'sanity'
-import type {DocumentActionProps} from 'sanity'
-import {firstUpperCaseLatter} from '@/utils/textFormatter'
+import { DocumentActionComponent, useDocumentOperation } from 'sanity'
+import type { DocumentActionProps } from 'sanity'
+import { firstUpperCaseLatter } from '@/utils/textFormatter'
 
-export function createImprovedAction(originalPublishAction: DocumentActionComponent) {
+export function createImprovedAction(
+  originalPublishAction: DocumentActionComponent
+) {
   const PublishDocumentAction = (props: DocumentActionProps) => {
-    const {patch, publish} = useDocumentOperation(props.id, props.type)
+    const { patch, publish } = useDocumentOperation(props.id, props.type)
     const originalResult = originalPublishAction(props)
 
     const labelName =
@@ -16,7 +18,7 @@ export function createImprovedAction(originalPublishAction: DocumentActionCompon
       ...originalResult,
       label: labelName,
       onHandle: () => {
-        const {published, draft} = props
+        const { published, draft } = props
 
         if (draft?.isPublished !== undefined) {
           const isDocumendPublished = published === null || !draft?.isPubslihed

@@ -1,8 +1,8 @@
-import {DocumentTextIcon} from '@sanity/icons'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { DocumentTextIcon } from '@sanity/icons'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import dayjs from 'dayjs'
-import {DateTimeInput} from '@/components/DateTimeInput'
-import {slugifyWithUniqueness} from '@/utils/uniquenessSlugify'
+import { DateTimeInput } from '@/components/DateTimeInput'
+import { slugifyWithUniqueness } from '@/utils/uniquenessSlugify'
 
 const isPostPublished = (date: string) => +new Date() >= +new Date(date)
 
@@ -15,10 +15,10 @@ export const postType = defineType({
     defineField({
       name: 'title',
       type: 'string',
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.required()
           .min(5)
-          .custom((value) => {
+          .custom(value => {
             const trimmed = value?.trim() || ''
 
             if (trimmed.length < 5) {
@@ -34,18 +34,21 @@ export const postType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      readOnly: ({document}) =>
-        Boolean(document?.isPublished && isPostPublished(document?.publishedAt as string)),
+      readOnly: ({ document }) =>
+        Boolean(
+          document?.isPublished &&
+            isPostPublished(document?.publishedAt as string)
+        ),
       description: 'Slug cannot be changed when the post is published.',
       options: {
         source: 'title',
         slugify: (input, _, context) => {
-          return slugifyWithUniqueness(input, context, {type: 'post'})
+          return slugifyWithUniqueness(input, context, { type: 'post' })
         },
       },
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.required().custom((slug, context) => {
-          const {document} = context
+          const { document } = context
           const title = String(document?.title || '')
 
           if (title.length < 5) {
@@ -90,13 +93,13 @@ export const postType = defineType({
     defineField({
       name: 'categories',
       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'category' } })],
     }),
     defineField({
       name: 'tags',
       type: 'array',
       title: 'Tags',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       options: {
         layout: 'tags',
       },
@@ -121,15 +124,15 @@ export const postType = defineType({
         'Indicates the current editorial state of this post. Use this field to coordinate the publishing workflow between team members. "Scheduled" requires a publish date. "Published" means it’s live. "In Review" is pending approval.',
       options: {
         list: [
-          {title: 'Draft', value: 'draft'},
-          {title: 'In Review', value: 'inReview'},
-          {title: 'Scheduled', value: 'scheduled'},
-          {title: 'Published', value: 'published'},
+          { title: 'Draft', value: 'draft' },
+          { title: 'In Review', value: 'inReview' },
+          { title: 'Scheduled', value: 'scheduled' },
+          { title: 'Published', value: 'published' },
         ],
         layout: 'radio',
       },
       initialValue: 'draft',
-      validation: (Rule) =>
+      validation: Rule =>
         Rule.custom((value, context) => {
           const publishedAt = context.document?.publishedAt
           if (value === 'scheduled' && !publishedAt) {
@@ -145,8 +148,8 @@ export const postType = defineType({
       components: {
         input: DateTimeInput,
       },
-      hidden: ({document}) => document?.workflowStatus !== 'scheduled',
-      validation: (Rule) => {
+      hidden: ({ document }) => document?.workflowStatus !== 'scheduled',
+      validation: Rule => {
         const minDate = dayjs().add(1, 'day')
 
         return Rule.required()
@@ -174,8 +177,8 @@ export const postType = defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      const { author } = selection
+      return { ...selection, subtitle: author && `by ${author}` }
     },
   },
 })
