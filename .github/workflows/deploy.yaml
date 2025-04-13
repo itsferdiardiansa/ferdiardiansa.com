@@ -13,6 +13,11 @@ on:
         required: true
         default: false
         description: Landing web
+      studio_web:
+        type: boolean
+        required: true
+        default: false
+        description: Landing web
       environment:
         type: choice
         description: Which server environment would you like to deploy?
@@ -39,7 +44,31 @@ jobs:
       org_id: ${{ secrets.VERCEL_ORG_ID }}
       project_id: ${{ secrets.VERCEL_WEB_LANDING_ID }}
       token: ${{ secrets.VERCEL_TOKEN }}
+  
+  deploy-studio-web:
+    runs-on: ubuntu-latest
+    if: inputs.studio_web == true
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
+      - uses: ./.github/actions/setup
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      
+      - name: Get API Version from package.json
+        run: |
+          version=$(jq -r .version apps/web/studio-blog/package.json)
+          echo "SANITY_STUDIO_API_VERSION=$version" >> $GITHUB_ENV
+
+      - name: Build
+        run: pnpm build
+      
+      - name: Deploy
+        run: pnpm deploy
+  
   deploy-landing-api:
     if: inputs.landing_api == true &&
       (
@@ -67,7 +96,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     if: always()
-    needs: [deploy-landing-web, deploy-landing-api]
+    needs: [deploy-landing-web, deploy-studio-web, deploy-landing-api]
     steps:
       - uses: actions/checkout@v4
 
@@ -75,7 +104,13 @@ jobs:
         id: slack_status
         shell: bash
         run: |
-          if [[ "${{ needs.deploy-landing-web.result }}" == "success" ]] || [[ "${{ needs.deploy-landing-api.result }}" == "success" ]]; then
+          result_landing_web=${{ needs.deploy-landing-web.result }}
+          result_studio_web=${{ needs.deploy-studio-web.result }}
+          result_landing_api=${{ needs.deploy-landing-api.result }}
+          
+          if $result_landing_web == "success" ]] || \
+             $result_studio_web == "success" ]] || \
+             $result_landing_api == "success" ]]; then
             echo color=good >> $GITHUB_OUTPUT
           else
             echo color=danger >> $GITHUB_OUTPUT
