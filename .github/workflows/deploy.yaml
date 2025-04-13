@@ -58,16 +58,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       
-      - name: Get API Version from package.json
+      - name: Get API Version
         run: |
           version=$(jq -r .version apps/web/studio-blog/package.json)
           echo "SANITY_STUDIO_API_VERSION=$version" >> $GITHUB_ENV
 
       - name: Build
-        run: pnpm run build
+        run: npx nx run @oxcyn-apps/web-studio-blog:build
       
       - name: Deploy
-        run: pnpm run deploy
+        run: npx nx run @oxcyn-apps/web-studio-blog:deploy
   
   deploy-landing-api:
     if: inputs.landing_api == true &&
