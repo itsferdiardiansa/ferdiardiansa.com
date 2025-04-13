@@ -17,7 +17,7 @@ on:
         type: boolean
         required: true
         default: false
-        description: Landing web
+        description: Studio web
       environment:
         type: choice
         description: Which server environment would you like to deploy?
