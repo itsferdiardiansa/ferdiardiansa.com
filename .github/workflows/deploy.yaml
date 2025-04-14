@@ -65,9 +65,6 @@ jobs:
           version=$(jq -r .version apps/web/studio-blog/package.json | cut -d '.' -f1)
           echo "SANITY_STUDIO_API_VERSION=$version" >> $GITHUB_ENV
         
-      - name: Authenticate Sanity CLI
-        run: echo "$SANITY_AUTH_TOKEN" | npx sanity login --token
-     
       - name: Build
         run: npx nx run @oxcyn-apps/web-studio-blog:build
       
