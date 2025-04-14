@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.studio_api
     outputs:
-      deployment_url: ${{ steps.deploy.outputs }}
+      deployment_url: ${{ steps.deploy.outputs.url }}
     env:
       SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
       SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
@@ -105,8 +105,8 @@ jobs:
         env:
           NODE_ENV: ${{ inputs.environment }}
         run: |
-          url=$(npx nx run @oxcyn-apps/web-studio-blog:deploy-graphql:ci | grep -o 'https://.*/graphql/[^/]*/[^/]*')
-          echo "deployment_url=$url" >> $GITHUB_OUTPUT
+          response_url=$(npx nx run @oxcyn-apps/web-studio-blog:deploy-graphql:ci | grep -o 'https://.*/graphql/[^/]*/[^/]*')
+          echo "url=$response_url" >> $GITHUB_OUTPUT
 
   deploy-landing-api:
     if: inputs.landing_api == true &&
