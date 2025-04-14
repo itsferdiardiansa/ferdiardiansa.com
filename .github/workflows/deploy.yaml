@@ -50,6 +50,9 @@ jobs:
     if: inputs.studio_web == true
     env:
       SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+      SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+      SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+      SANITY_STUDIO_HOST: ${{ secrets.SANITY_STUDIO_HOST }}
     steps:
       - uses: actions/checkout@v3
         with:
