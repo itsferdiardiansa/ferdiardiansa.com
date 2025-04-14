@@ -14,6 +14,7 @@
     "deploy": "sanity deploy",
     "deploy:ci": "SANITY_AUTH_TOKEN=$SANITY_AUTH_TOKEN npx sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
+    "deploy-graphql:ci": "SANITY_AUTH_TOKEN=$SANITY_AUTH_TOKEN npx sanity graphql deploy",
     "type-check": "tsc --noEmit --diagnostics"
   },
   "keywords": [

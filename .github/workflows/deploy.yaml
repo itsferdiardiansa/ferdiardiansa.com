@@ -8,6 +8,11 @@ on:
         required: true
         default: false
         description: Landing api (GraphQL)
+      studio_api:
+        type: boolean
+        required: true
+        default: false
+        description: Studio api (GraphQL)
       personal_web:
         type: boolean
         required: true
@@ -49,6 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.studio_web == true
     env:
+      NODE_ENV: ${{ inputs.environment }}
       SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
       SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
       SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
@@ -62,11 +68,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      
-      - name: Get API Version
-        run: |
-          version=$(jq -r .version apps/web/studio-blog/package.json | cut -d '.' -f1)
-          echo "SANITY_STUDIO_API_VERSION=$version" >> $GITHUB_ENV
         
       - name: Build
         run: npx nx run @oxcyn-apps/web-studio-blog:build
@@ -74,6 +75,33 @@ jobs:
       - name: Deploy
         run: npx nx run @oxcyn-apps/web-studio-blog:deploy:ci
   
+  deploy-studio-api:
+    runs-on: ubuntu-latest
+    if: inputs.studio_api
+    env:
+      NODE_ENV: ${{ inputs.environment }}
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+      SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+      SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+      SANITY_STUDIO_HOST: ${{ secrets.SANITY_STUDIO_HOST }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - uses: ./.github/actions/setup
+
+      - name: Install deps
+        run: pnpm install --no-frozen-lockfile
+      
+      - name: Set GIT_BRANCH env
+        run: |
+          branch_name=$(git branch --show-current)
+          echo "GIT_BRANCH=$branch_name" >> $GITHUB_ENV
+      
+      - name: Deploy
+        run: npx nx run @oxcyn-apps/web-studio-blog:deploy-graphql:ci
+
   deploy-landing-api:
     if: inputs.landing_api == true &&
       (
@@ -101,7 +129,12 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     if: always()
-    needs: [deploy-landing-web, deploy-studio-web, deploy-landing-api]
+    needs: [
+      deploy-landing-web, 
+      deploy-studio-web, 
+      deploy-landing-api,
+      deploy-studio-api
+    ]
     steps:
       - uses: actions/checkout@v4
 
@@ -109,16 +142,19 @@ jobs:
         id: slack_status
         shell: bash
         run: |
-          result_landing_web=${{ needs.deploy-landing-web.result }}
-          result_studio_web=${{ needs.deploy-studio-web.result }}
-          result_landing_api=${{ needs.deploy-landing-api.result }}
+          results=(
+            "${{ needs.deploy-landing-web.result }}"
+            "${{ needs.deploy-studio-web.result }}"
+            "${{ needs.deploy-studio-api.result }}"
+            "${{ needs.deploy-landing-api.result }}"
+          )
           
-          if $result_landing_web == "success" ]] || \
-             $result_studio_web == "success" ]] || \
-             $result_landing_api == "success" ]]; then
+          if [[ " ${results[@]} " =~ "success" ]]; then
             echo color=good >> $GITHUB_OUTPUT
+            echo status=passed >> $GITHUB_OUTPUT
           else
             echo color=danger >> $GITHUB_OUTPUT
+            echo status=failed >> $GITHUB_OUTPUT
           fi
 
       - name: Send notification
@@ -132,7 +168,7 @@ jobs:
             - *Env:* `${{ inputs.environment }}`
             - *By:* `${{ github.actor }}`
 
-            - 🖥️ *Landing Web:* `${{ needs.deploy-landing-web.outputs.deployment_url || 'N/A' }}`
-            - 📡 *Landing API:* `${{ needs.deploy-landing-api.outputs.deployment_url || 'N/A' }}`
+            - *Landing Web:* `${{ needs.deploy-landing-web.outputs.deployment_url || 'N/A' }}`
+            - *Landing API:* `${{ needs.deploy-landing-api.outputs.deployment_url || 'N/A' }}`
 
-            - [🔗 View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            - [View Workflow Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
