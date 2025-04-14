@@ -1,6 +1,7 @@
 {
   "extends": "nx/presets/npm.json",
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "nxCloudAccessToken": "ZTFiNTk2N2EtM2M3Yy00OTJkLTgyNGMtMjU5NDVjYzFmYmJmfHJlYWQtd3JpdGU=",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
@@ -17,6 +18,5 @@
     "lint": {
       "cache": true
     }
-  },
-  "nxCloudAccessToken": "ZTFiNTk2N2EtM2M3Yy00OTJkLTgyNGMtMjU5NDVjYzFmYmJmfHJlYWQtd3JpdGU="
+  }
 }

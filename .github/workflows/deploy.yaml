@@ -48,6 +48,8 @@ jobs:
   deploy-studio-web:
     runs-on: ubuntu-latest
     if: inputs.studio_web == true
+    env:
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -60,17 +62,17 @@ jobs:
       
       - name: Get API Version
         run: |
-          version=$(jq -r .version apps/web/studio-blog/package.json)
+          version=$(jq -r .version apps/web/studio-blog/package.json | cut -d '.' -f1)
           echo "SANITY_STUDIO_API_VERSION=$version" >> $GITHUB_ENV
         
       - name: Authenticate Sanity CLI
-        run: echo "${{ secrets.SANITY_AUTH_TOKEN }}" | npx sanity login --token
+        run: echo "$SANITY_AUTH_TOKEN" | npx sanity login --token
      
       - name: Build
         run: npx nx run @oxcyn-apps/web-studio-blog:build
       
       - name: Deploy
-        run: npx nx run @oxcyn-apps/web-studio-blog:deploy
+        run: npx nx run @oxcyn-apps/web-studio-blog:deploy:ci
   
   deploy-landing-api:
     if: inputs.landing_api == true &&

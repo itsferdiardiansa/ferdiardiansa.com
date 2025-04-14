@@ -8,12 +8,9 @@ import { createImprovedAction } from './actions/PublishDocumentAction'
 export default defineConfig({
   name: 'default',
   title: '@ferdiardiansa - writing',
-
   projectId: import.meta.env.SANITY_STUDIO_PROJECT_ID!,
   dataset: import.meta.env.SANITY_STUDIO_DATASET!,
-
   plugins: [structureTool(), visionTool(), dateRangePlugin()],
-
   document: {
     actions: prev => {
       return prev.map(originalAction => {
