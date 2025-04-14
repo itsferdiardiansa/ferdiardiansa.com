@@ -79,7 +79,6 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.studio_api
     env:
-      NODE_ENV: ${{ inputs.environment }}
       SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
       SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
       SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
@@ -100,6 +99,8 @@ jobs:
           echo "GIT_BRANCH=$branch_name" >> $GITHUB_ENV
       
       - name: Deploy
+        env:
+          NODE_ENV: ${{ inputs.environment }}
         run: npx nx run @oxcyn-apps/web-studio-blog:deploy-graphql:ci
 
   deploy-landing-api:
