@@ -35,7 +35,7 @@ on:
 permissions: write-all
 jobs:
   pre-release:
-    if: (startsWith(github.ref, 'refs/heads/feat/') && github.ref != 'refs/heads/main')
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       COMMIT_TAG: ${{ inputs.commit_tag }}
