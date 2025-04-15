@@ -19,33 +19,36 @@
 
 ---
 
-## Project Structure
-
-apps
-├── web/studio-blog
-│ ├── actions
-│ ├── components
-│ ├── schemaTypes
-│ ├── utils
-│ ├── button.stories.tsx
-│ ├── sanity.config.ts
-│ └── tsconfig.json
-
----
-
-### Requirements
+## Requirements
 
 - Node.js `>=18 <22` (Sanity supports Node 18/20)
 - PNPM or Yarn (recommended)
 - A Sanity project (`projectId`, `dataset`)
 
-### Install dependencies
+## Project Structure
+
+```
+apps
+├── web/studio-blog
+│     ├── actions
+│     ├── components
+│     ├── schemaTypes
+│     ├── utils
+│     ├── button.stories.tsx
+│     ├── sanity.config.ts
+│     └── tsconfig.json
+└── ...
+```
+
+---
+
+## Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### Start development
+## Start development
 
 ```
 pnpm dev
@@ -53,7 +56,9 @@ pnpm dev
 
 This starts the Sanity Studio at `http://localhost:3333`
 
-### Deploying to Sanity Studio (via GitHub Actions)
+---
+
+## Deploying to Sanity Studio (via GitHub Actions)
 
 This project includes a CI/CD pipeline to Studio to Sanity’s hosted service.
 
@@ -66,7 +71,7 @@ This workflow
 - Authenticates with Sanity using the token (only deploy)
 - Deploys the Studio/GraphQL non-interactively
 
-### Run it manually or on push
+## Run it manually or on push
 
 Web Studio
 
@@ -80,14 +85,16 @@ GraphQL
 npx nx run @oxcyn-apps/web-studio-blog:deploy-graphql:ci
 ```
 
-### Best Practices
+---
 
-✅ Using version control for schema changes — track edits to document types
-✅ Running Prettier & lint before deploys — enforce consistent formatting
-✅ Using API versioning via `SANITY_STUDIO_API_VERSION` for consistent behavior
-✅ Lock Node & Sanity versions to ensure reproducible builds
+## Best Practices
 
-### Document Types
+- Using version control for schema changes — track edits to document types
+- Running Prettier & lint before deploys — enforce consistent formatting
+- Using API versioning via `SANITY_STUDIO_API_VERSION` for consistent behavior
+- Lock Node & Sanity versions to ensure reproducible builds
+
+## Document Types
 
 | Name     | Description                                                                  |
 | -------- | ---------------------------------------------------------------------------- |
@@ -95,10 +102,10 @@ npx nx run @oxcyn-apps/web-studio-blog:deploy-graphql:ci
 | Category | Tag-like categorization for posts                                            |
 | Post     | Rich text post including body, author, categories, image, slug, SEO metadata |
 
-### License
+## License
 
 This project is licensed under the MIT License.
 
-### Credits
+## Credits
 
 Built with 💖 using `Sanity Studio`, deployed via `GitHub Actions`, and maintained by `itsferdiardiansa`.
