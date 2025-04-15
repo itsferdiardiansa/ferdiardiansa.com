@@ -1,5 +1,5 @@
 name: Deploy
-run-name: 'deploy: ${{ github.sha }}'
+run-name: 'deploy'
 on:
   workflow_dispatch:
     inputs:
