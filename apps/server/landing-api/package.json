@@ -22,7 +22,7 @@
     "type-check": "tsc --noEmit --diagnostics"
   },
   "dependencies": {
-    "@apollo/server": "^4.10.4",
+    "@apollo/server": "^5.0.0",
     "@graphql-tools/utils": "^10.2.2",
     "@nestjs/apollo": "^12.1.0",
     "@nestjs/common": "^10.3.9",
